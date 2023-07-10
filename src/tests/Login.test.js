@@ -5,7 +5,7 @@ import { renderWithRouter } from './helpers/renderWithRouter';
 
 describe('Testa a tela de Login', () => {
   it('Testa se a tela de Login renderiza como esperado', () => {
-    renderWithRouter(<App />);
+    const { history } = renderWithRouter(<App />);
 
     const email = screen.getByTestId('email-input');
     const password = screen.getByTestId('password-input');
@@ -21,5 +21,10 @@ describe('Testa a tela de Login', () => {
     userEvent.type(password, 'password');
 
     expect(enterButton).not.toBeDisabled();
+
+    userEvent.click(enterButton);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/meals');
   });
 });

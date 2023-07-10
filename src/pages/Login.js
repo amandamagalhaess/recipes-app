@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 
 function Login() {
@@ -21,8 +22,10 @@ function Login() {
     }
   }, [email, password, setButtonDisabled]);
 
+  const history = useHistory();
   const handleClick = () => {
     localStorage.setItem('user', JSON.stringify({ email }));
+    history.push('/meals');
   };
 
   return (
