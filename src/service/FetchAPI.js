@@ -33,3 +33,19 @@ export const fetchDrinks = async (searchOptions, searchText) => {
       .then((data) => data.drinks);
   }
 };
+
+export const fetchAllMeals = async () => fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+  .then((response) => response.json())
+  .then((data) => data.meals);
+
+export const fetchMealsByCategory = async (category) => fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+  .then((response) => response.json())
+  .then((data) => data.meals);
+
+export const fetchAllDrinks = async () => fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+  .then((response) => response.json())
+  .then((data) => data.drinks);
+
+export const fetchDrinksByCategory = async (category) => fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`)
+  .then((response) => response.json())
+  .then((data) => data.drinks);

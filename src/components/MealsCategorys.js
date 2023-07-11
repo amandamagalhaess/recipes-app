@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import RecipesContext from '../context/RecipesContext';
+import { fetchMealsByCategory, fetchAllMeals } from '../service/FetchAPI';
 
 export default function MealsCategorys() {
   const [categories, setCategories] = useState([]);
+  const { setMeals } = useContext(RecipesContext);
+  const magicNumber = 5;
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -12,18 +16,41 @@ export default function MealsCategorys() {
 
     fetchCategories();
   }, []);
-  const magicNumber = 5;
+
+  const handleCategoryFilter = async (category) => {
+    const filteredMeals = await fetchMealsByCategory(category);
+    setMeals(filteredMeals);
+  };
+
+  const handleAllButton = async () => {
+    setMeals();
+    const allMeals = await fetchAllMeals();
+    setMeals(allMeals);
+  };
 
   return (
+
     <div>
       {categories && categories.slice(0, magicNumber).map((category) => (
-        <div
+
+        <button
           key={ category.strCategory }
+          type="button"
+          onClick={ () => handleCategoryFilter(category.strCategory) }
           data-testid={ `${category.strCategory}-category-filter` }
         >
-          <button type="button">{category.strCategory}</button>
-        </div>
+          {category.strCategory}
+
+        </button>
+
       ))}
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        onClick={ handleAllButton }
+      >
+        All
+      </button>
     </div>
   );
 }
