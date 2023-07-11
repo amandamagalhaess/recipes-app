@@ -6,6 +6,19 @@ function RecipesProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isButtonDisabled, setButtonDisabled] = useState(true);
+  const [searchOptions, setSearchOptions] = useState('');
+  const [searchText, setSearchText] = useState('');
+  const [meals, setMeals] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchMeals = async () => {
+  //     const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  //     const data = await response.json();
+  //     setMeals(data.meals);
+  //   };
+
+  //   fetchMeals();
+  // }, []);
 
   const value = useMemo(() => ({
     email,
@@ -14,7 +27,13 @@ function RecipesProvider({ children }) {
     setPassword,
     isButtonDisabled,
     setButtonDisabled,
-  }), [email, isButtonDisabled, password]);
+    searchOptions,
+    setSearchOptions,
+    searchText,
+    setSearchText,
+    meals,
+    setMeals,
+  }), [email, isButtonDisabled, meals, password, searchOptions, searchText]);
 
   return (
     <RecipesContext.Provider value={ value }>
