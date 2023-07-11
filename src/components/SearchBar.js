@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import RecipesContext from '../context/RecipesContext';
 import { fetchDrinks, fetchMeals } from '../service/FetchAPI';
 
 function SearchBar() {
   const location = useLocation();
+  const history = useHistory();
 
   const {
     searchOptions,
@@ -19,9 +20,19 @@ function SearchBar() {
     if (location.pathname === '/meals') {
       const meals = await fetchMeals(searchOptions, searchText);
       setMeals(meals);
+      if (!meals) {
+        global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      } else if (meals && meals.length === 1) {
+        history.push(`/meals/${meals[0].idMeal}`);
+      }
     } else if (location.pathname === '/drinks') {
       const drinks = await fetchDrinks(searchOptions, searchText);
       setDrinks(drinks);
+      if (!drinks) {
+        global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      } else if (drinks && drinks.length === 1) {
+        history.push(`/drinks/${drinks[0].idDrink}`);
+      }
     }
   };
 

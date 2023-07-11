@@ -4,12 +4,13 @@ import RecipesContext from '../context/RecipesContext';
 
 export default function Drinks() {
   const { drinks } = useContext(RecipesContext);
+  const limit = 12;
 
   return (
     <div>
       <Header />
       {
-        drinks && drinks.length > 0 && drinks.map((drink, index) => (
+        drinks && drinks.length > 0 && drinks.slice(0, limit).map((drink, index) => (
           <div key={ drink.idDrink } data-testid={ `${index}-recipe-card` }>
             <img
               src={ drink.strDrinkThumb }
