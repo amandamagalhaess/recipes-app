@@ -9,6 +9,7 @@ function RecipesProvider({ children }) {
   const [searchOptions, setSearchOptions] = useState('');
   const [searchText, setSearchText] = useState('');
   const [meals, setMeals] = useState([]);
+  const [drinks, setDrinks] = useState([]);
 
   // useEffect(() => {
   //   const fetchMeals = async () => {
@@ -33,7 +34,9 @@ function RecipesProvider({ children }) {
     setSearchText,
     meals,
     setMeals,
-  }), [email, isButtonDisabled, meals, password, searchOptions, searchText]);
+    drinks,
+    setDrinks,
+  }), [drinks, email, isButtonDisabled, meals, password, searchOptions, searchText]);
 
   return (
     <RecipesContext.Provider value={ value }>

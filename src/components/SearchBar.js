@@ -1,19 +1,28 @@
 import React, { useContext } from 'react';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import RecipesContext from '../context/RecipesContext';
-import { fetchMeals } from '../service/FetchAPI';
+import { fetchDrinks, fetchMeals } from '../service/FetchAPI';
 
 function SearchBar() {
+  const location = useLocation();
+
   const {
     searchOptions,
     setSearchOptions,
     searchText,
     setSearchText,
     setMeals,
+    setDrinks,
   } = useContext(RecipesContext);
 
   const handleSearchButton = async () => {
-    const meals = await fetchMeals(searchOptions, searchText);
-    setMeals(meals);
+    if (location.pathname === '/meals') {
+      const meals = await fetchMeals(searchOptions, searchText);
+      setMeals(meals);
+    } else if (location.pathname === '/drinks') {
+      const drinks = await fetchDrinks(searchOptions, searchText);
+      setDrinks(drinks);
+    }
   };
 
   return (

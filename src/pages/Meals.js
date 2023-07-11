@@ -10,7 +10,7 @@ function Meals() {
       <Header />
       {
         meals && meals.length > 0 && meals.map((meal, index) => (
-          <div key={ meal.idMeal }>
+          <div key={ meal.idMeal } data-testid={ `${index}-recipe-card` }>
             <img
               src={ meal.strMealThumb }
               alt={ meal.strMeal }
