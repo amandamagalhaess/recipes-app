@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
 import Footer from '../components/Footer';
+import DrinksCategorys from '../components/DrinksCategorys';
 
 export default function Drinks() {
   const { drinks } = useContext(RecipesContext);
@@ -10,6 +11,7 @@ export default function Drinks() {
   return (
     <div>
       <Header />
+      <DrinksCategorys />
       {
         drinks && drinks.length > 0 && drinks.slice(0, limit).map((drink, index) => (
           <div key={ drink.idDrink } data-testid={ `${index}-recipe-card` }>
