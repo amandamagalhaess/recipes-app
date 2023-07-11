@@ -27,7 +27,18 @@ export default function Header() {
     history.push('/profile');
   };
 
-  const showSeachIcon = ['/meals', '/drinks'].includes(location.pathname);
+  const showSearchIcon = ['/meals', '/drinks'].includes(location.pathname);
+
+  const handleSearchClick = () => {
+    const searchInput = document.querySelector('input');
+    if (searchInput.style.display === 'none') {
+      searchInput.style.display = 'block';
+      searchInput.dataset.testid = 'search-input';
+    } else {
+      searchInput.style.display = 'none';
+      searchInput.dataset.testid = '';
+    }
+  };
 
   return (
     <div>
@@ -41,10 +52,17 @@ export default function Header() {
           data-testid="profile-top-btn"
         />
       </a>
-      { showSeachIcon && (
-        <img alt="Ícone de Pesquisa" src={ searchIcon } data-testid="search-top-btn" />
+      { showSearchIcon && (
+        <button onClick={ handleSearchClick }>
+          <img
+            alt="Ícone de Pesquisa"
+            src={ searchIcon }
+            data-testid="search-top-btn"
+          />
+        </button>
       )}
       <h1 data-testid="page-title">{getTitle()}</h1>
+      <input data-testid="search-input" style={ { display: 'none' } } />
     </div>
   );
 }
