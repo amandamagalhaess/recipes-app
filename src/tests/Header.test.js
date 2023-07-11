@@ -63,14 +63,15 @@ describe('Testa o componente Header', () => {
 
     const searchTopBtn = screen.getByTestId('search-top-btn');
     const searchInput = screen.getByTestId('search-input');
+    const searchContent = screen.getByTestId('search-content');
 
     expect(searchInput).toBeInTheDocument();
-    expect(searchInput).toHaveStyle('display: none');
+    expect(searchContent).toHaveStyle('display: none');
 
     userEvent.click(searchTopBtn);
-    expect(searchInput).toHaveStyle('display: block');
+    expect(searchContent).toHaveStyle('display: block');
 
     userEvent.click(searchTopBtn);
-    expect(searchInput).toHaveStyle('display: none');
+    expect(searchContent).toHaveStyle('display: none');
   });
 });
