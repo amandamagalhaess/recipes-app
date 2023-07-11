@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import RecipesContext from './RecipesContext';
 
 function RecipesProvider({ children }) {
@@ -11,15 +11,25 @@ function RecipesProvider({ children }) {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchMeals = async () => {
-  //     const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-  //     const data = await response.json();
-  //     setMeals(data.meals);
-  //   };
+  useEffect(() => {
+    const fetchMeals = async () => {
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      const data = await response.json();
+      setMeals(data.meals);
+    };
 
-  //   fetchMeals();
-  // }, []);
+    fetchMeals();
+  }, []);
+
+  useEffect(() => {
+    const fetchDrinks = async () => {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      const data = await response.json();
+      setDrinks(data.drinks);
+    };
+
+    fetchDrinks();
+  }, []);
 
   const value = useMemo(() => ({
     email,
