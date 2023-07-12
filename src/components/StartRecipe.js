@@ -3,10 +3,14 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function StartRecipe() {
   const history = useHistory();
+
+  const handleClick = () => {
+    history.push(`${history.location.pathname}/in-progress`);
+  };
   return (
     <button
       className="btnStart"
-      onClick={ () => history.push(`${history.location.pathname}/in-progress`) }
+      onClick={ handleClick }
       data-testid="start-recipe-btn"
     >
       Start Recipe

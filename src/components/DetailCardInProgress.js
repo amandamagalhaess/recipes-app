@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
@@ -8,6 +8,7 @@ function DetailCardInProgress(
 ) {
   const location = useLocation();
   const history = useHistory();
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
 
   const handleClick = () => {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -32,6 +33,50 @@ function DetailCardInProgress(
     history.push('/done-recipes');
   };
 
+  const handleChange = (event, index) => {
+    const { name, value } = event.target;
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: {}, drinks: {} };
+    if (checked && location.pathname.includes('meals')) {
+      inProgressRecipes.meals[id] = [...selectedIngredients, ingredients[2]];
+    } else {
+      inProgressRecipes.drinks[id] = [...selectedIngredients, ingredients[index]];
+    }
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    setSelectedIngredients([...selectedIngredients, ingredients[index]]);
+
+    if (!checked && location.pathname.includes('meals')) {
+      const newIngredients = selectedIngredients.filter((_, i) => i !== index);
+      inProgressRecipes.meals[id] = newIngredients;
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+      setSelectedIngredients(newIngredients);
+    }
+    if (!checked && location.pathname.includes('drinks')) {
+      const newIngredients = selectedIngredients.filter((_, i) => i !== index);
+      inProgressRecipes.drinks[id] = newIngredients;
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+      setSelectedIngredients(newIngredients);
+    }
+  };
+  /*  const handleChange = (event, index) => {
+    const { checked } = event.target;
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: {}, drinks: {} };
+    const recipeToUpdate = location.pathname.includes('meals') ? inProgressRecipes.meals : inProgressRecipes.drinks;
+
+    if (checked) {
+      recipeToUpdate[id] = [...selectedIngredients, ingredients[index]];
+    } else {
+      recipeToUpdate[id] = selectedIngredients.filter((_, i) => i !== index);
+    }
+
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    setSelectedIngredients((prevSelectedIngredients) => {
+      if (prevSelectedIngredients.includes(index)) {
+        return prevSelectedIngredients.filter((i) => i !== index);
+      }
+      return [...prevSelectedIngredients, index];
+    });
+  }; */
+
   return (
     <div>
       <img src={ image } alt={ name } data-testid="recipe-photo" />
@@ -41,7 +86,10 @@ function DetailCardInProgress(
         {
           ingredients.map((ingredient, index) => (
             <label key={ index }>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onChange={ handleChange }
+              />
               {`${ingredient[1]} - ${measures[index][1]}`}
             </label>
           ))
