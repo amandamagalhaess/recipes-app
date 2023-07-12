@@ -5,6 +5,7 @@ import DetailCard from '../components/DetailCard';
 import RecommendationCarousel from '../components/RecomendationCarousel';
 import StartRecipe from '../components/StartRecipe';
 import ContinueRecipe from '../components/ContinueRecipe';
+import shareIcon from '../images/shareIcon.svg';
 
 function RecipeDetails() {
   const { id } = useParams();
@@ -37,8 +38,18 @@ function RecipeDetails() {
     fetchRecipe();
   }, [id, location.pathname]);
 
+  const handleShareButton = () => {
+    const { pathname } = location;
+    const url = `http://localhost:3000${pathname}`;
+    navigator.clipboard.writeText(url);
+    const detailsContainer = document.getElementById('details-container');
+    const copyLink = document.createElement('p');
+    copyLink.innerHTML = 'Link copied!';
+    detailsContainer.appendChild(copyLink);
+  };
+
   return (
-    <div>
+    <div id="details-container">
       { recipe && (
         location.pathname.includes('meals') ? (
           <DetailCard
@@ -65,8 +76,10 @@ function RecipeDetails() {
       <RecommendationCarousel />
       <button
         data-testid="share-btn"
+        onClick={ handleShareButton }
+
       >
-        Share
+        <img src={ shareIcon } alt="" />
       </button>
       <button
         data-testid="favorite-btn"
