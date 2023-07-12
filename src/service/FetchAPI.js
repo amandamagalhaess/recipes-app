@@ -49,3 +49,11 @@ export const fetchAllDrinks = async () => fetch('https://www.thecocktaildb.com/a
 export const fetchDrinksByCategory = async (category) => fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`)
   .then((response) => response.json())
   .then((data) => data.drinks);
+
+export const fetchMealById = async (id) => fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+  .then((response) => response.json())
+  .then((data) => data.meals[0]);
+
+export const fetchDrinkById = async (id) => fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+  .then((response) => response.json())
+  .then((data) => data.drinks[0]);
