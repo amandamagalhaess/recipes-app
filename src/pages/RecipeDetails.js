@@ -63,6 +63,16 @@ function RecipeDetails() {
         )
       )}
       <RecommendationCarousel />
+      <button
+        data-testid="share-btn"
+      >
+        Share
+      </button>
+      <button
+        data-testid="favorite-btn"
+      >
+        Favorite
+      </button>
       { localStorage.getItem('inProgressRecipes') && JSON
         .parse(localStorage.getItem('inProgressRecipes').includes(id))
         ? <ContinueRecipe /> : <StartRecipe />}
