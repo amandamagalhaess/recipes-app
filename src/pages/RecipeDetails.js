@@ -48,6 +48,24 @@ function RecipeDetails() {
     detailsContainer.appendChild(copyLink);
   };
 
+  const handleFavoriteButton = () => {
+    const { pathname } = location;
+    const { strCategory, strAlcoholic } = recipe;
+    const type = pathname.includes('meals') ? 'meal' : 'drink';
+    const favoriteRecipe = {
+      id,
+      type,
+      nationality: recipe.strArea || '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic || '',
+      name: recipe.strMeal || recipe.strDrink,
+      image: recipe.strMealThumb || recipe.strDrinkThumb,
+    };
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    localStorage.setItem('favoriteRecipes', JSON
+      .stringify([...favoriteRecipes, favoriteRecipe]));
+  };
+
   return (
     <div id="details-container">
       { recipe && (
@@ -83,6 +101,7 @@ function RecipeDetails() {
       </button>
       <button
         data-testid="favorite-btn"
+        onClick={ handleFavoriteButton }
       >
         Favorite
       </button>
