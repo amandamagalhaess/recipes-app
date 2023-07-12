@@ -3,6 +3,7 @@ import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.mi
 import { fetchDrinkById, fetchMealById } from '../service/FetchAPI';
 import DetailCard from '../components/DetailCard';
 import RecommendationCarousel from '../components/RecomendationCarousel';
+import StartRecipe from '../components/StartRecipe';
 
 function RecipeDetails() {
   const { id } = useParams();
@@ -61,6 +62,7 @@ function RecipeDetails() {
         )
       )}
       <RecommendationCarousel />
+      <StartRecipe />
     </div>
 
   );
