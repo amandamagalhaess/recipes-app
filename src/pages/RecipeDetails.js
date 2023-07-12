@@ -6,6 +6,8 @@ import RecommendationCarousel from '../components/RecomendationCarousel';
 import StartRecipe from '../components/StartRecipe';
 import ContinueRecipe from '../components/ContinueRecipe';
 import shareIcon from '../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function RecipeDetails() {
   const { id } = useParams();
@@ -14,6 +16,7 @@ function RecipeDetails() {
   const [recipe, setRecipe] = useState(undefined);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -62,8 +65,16 @@ function RecipeDetails() {
       image: recipe.strMealThumb || recipe.strDrinkThumb,
     };
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    localStorage.setItem('favoriteRecipes', JSON
-      .stringify([...favoriteRecipes, favoriteRecipe]));
+
+    if (isFavorite) {
+      setIsFavorite(false);
+      const newFavoriteRecipes = favoriteRecipes.filter((favorite) => favorite.id !== id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
+    } else {
+      setIsFavorite(true);
+      localStorage.setItem('favoriteRecipes', JSON
+        .stringify([...favoriteRecipes, favoriteRecipe]));
+    }
   };
 
   return (
@@ -99,12 +110,26 @@ function RecipeDetails() {
       >
         <img src={ shareIcon } alt="" />
       </button>
-      <button
-        data-testid="favorite-btn"
-        onClick={ handleFavoriteButton }
-      >
-        Favorite
-      </button>
+      { localStorage.getItem('favoriteRecipes') && JSON
+        .parse(localStorage.getItem('favoriteRecipes').includes(id))
+        ? (
+          <button
+            onClick={ handleFavoriteButton }
+          >
+            <img src={ blackHeartIcon } alt="" data-testid="favorite-btn" />
+          </button>
+        ) : (
+          <button
+            onClick={ handleFavoriteButton }
+          >
+            <img
+              src={ whiteHeartIcon }
+              alt=""
+              data-testid="favorite-btn"
+            />
+          </button>
+        )}
+
       { localStorage.getItem('inProgressRecipes') && JSON
         .parse(localStorage.getItem('inProgressRecipes').includes(id))
         ? <ContinueRecipe /> : <StartRecipe />}
