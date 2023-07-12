@@ -4,6 +4,7 @@ import { fetchDrinkById, fetchMealById } from '../service/FetchAPI';
 import DetailCard from '../components/DetailCard';
 import RecommendationCarousel from '../components/RecomendationCarousel';
 import StartRecipe from '../components/StartRecipe';
+import ContinueRecipe from '../components/ContinueRecipe';
 
 function RecipeDetails() {
   const { id } = useParams();
@@ -62,7 +63,10 @@ function RecipeDetails() {
         )
       )}
       <RecommendationCarousel />
-      <StartRecipe />
+      { localStorage.getItem('inProgressRecipes') && JSON
+        .parse(localStorage.getItem('inProgressRecipes').includes(id))
+        ? <ContinueRecipe /> : <StartRecipe />}
+
     </div>
 
   );

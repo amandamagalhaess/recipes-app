@@ -34,48 +34,33 @@ function DetailCardInProgress(
   };
 
   const handleChange = (event, index) => {
-    const { name, value } = event.target;
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: {}, drinks: {} };
+    const { checked } = event.target;
+    console.log(checked);
+    const inProgressRecipes = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { meals: {}, drinks: {} };
     if (checked && location.pathname.includes('meals')) {
-      inProgressRecipes.meals[id] = [...selectedIngredients, ingredients[2]];
-    } else {
-      inProgressRecipes.drinks[id] = [...selectedIngredients, ingredients[index]];
+      inProgressRecipes.meals[id] = [...selectedIngredients, ingredients[index][1]];
+    } else if (checked && location.pathname.includes('drinks')) {
+      inProgressRecipes.drinks[id] = [...selectedIngredients, ingredients[index][1]];
     }
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-    setSelectedIngredients([...selectedIngredients, ingredients[index]]);
+    setSelectedIngredients([...selectedIngredients, ingredients[index][1]]);
 
     if (!checked && location.pathname.includes('meals')) {
-      const newIngredients = selectedIngredients.filter((_, i) => i !== index);
+      const newIngredients = selectedIngredients
+        .filter((ingredient) => ingredient !== ingredients[index][1]);
       inProgressRecipes.meals[id] = newIngredients;
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
       setSelectedIngredients(newIngredients);
     }
     if (!checked && location.pathname.includes('drinks')) {
-      const newIngredients = selectedIngredients.filter((_, i) => i !== index);
+      const newIngredients = selectedIngredients
+        .filter((ingredient) => ingredient !== ingredients[index][1]);
       inProgressRecipes.drinks[id] = newIngredients;
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
       setSelectedIngredients(newIngredients);
     }
   };
-  /*  const handleChange = (event, index) => {
-    const { checked } = event.target;
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: {}, drinks: {} };
-    const recipeToUpdate = location.pathname.includes('meals') ? inProgressRecipes.meals : inProgressRecipes.drinks;
-
-    if (checked) {
-      recipeToUpdate[id] = [...selectedIngredients, ingredients[index]];
-    } else {
-      recipeToUpdate[id] = selectedIngredients.filter((_, i) => i !== index);
-    }
-
-    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-    setSelectedIngredients((prevSelectedIngredients) => {
-      if (prevSelectedIngredients.includes(index)) {
-        return prevSelectedIngredients.filter((i) => i !== index);
-      }
-      return [...prevSelectedIngredients, index];
-    });
-  }; */
 
   return (
     <div>
@@ -88,7 +73,7 @@ function DetailCardInProgress(
             <label key={ index }>
               <input
                 type="checkbox"
-                onChange={ handleChange }
+                onChange={ (event) => handleChange(event, index) }
               />
               {`${ingredient[1]} - ${measures[index][1]}`}
             </label>
