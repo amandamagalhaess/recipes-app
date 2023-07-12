@@ -1,43 +1,51 @@
 import React, { useContext, useEffect, useState } from 'react';
 import RecipesContext from '../context/RecipesContext';
-import { fetchDrinksByCategory, fetchAllDrinks } from '../service/FetchAPI';
+import { fetchMealsByCategory, fetchAllMeals } from '../service/FetchAPI';
 
-export default function DrinksCategorys() {
+export default function MealsCategorys() {
   const [categories, setCategories] = useState([]);
-  const { setDrinks } = useContext(RecipesContext);
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  const { setMeals } = useContext(RecipesContext);
   const magicNumber = 5;
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
       const data = await response.json();
-      setCategories(data.drinks);
+      setCategories(data.meals);
     };
 
     fetchCategories();
   }, []);
 
   const handleCategoryFilter = async (category) => {
-    setDrinks([]);
-    const filteredDrinks = await fetchDrinksByCategory(category);
-    setDrinks(filteredDrinks);
+    if (category === selectedCategory) {
+      const allMeals = await fetchAllMeals();
+      setMeals(allMeals);
+      setSelectedCategory('');
+    } else {
+      const filteredMeals = await fetchMealsByCategory(category);
+      setMeals(filteredMeals);
+      setSelectedCategory(category);
+    }
   };
 
   const handleAllButton = async () => {
-    setDrinks([]);
-    const allDrinks = await fetchAllDrinks();
-    setDrinks(allDrinks);
+    const allMeals = await fetchAllMeals();
+    setMeals(allMeals);
   };
 
   return (
+
     <div>
       {categories && categories.slice(0, magicNumber).map((category) => (
 
         <button
           key={ category.strCategory }
-          data-testid={ `${category.strCategory}-category-filter` }
           type="button"
           onClick={ () => handleCategoryFilter(category.strCategory) }
+          data-testid={ `${category.strCategory}-category-filter` }
         >
           {category.strCategory}
 

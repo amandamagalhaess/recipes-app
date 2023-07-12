@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import RecipesContext from '../context/RecipesContext';
-import MealsCategorys from '../components/MealsCategorys';
+import MealsCategories from '../components/MealsCategories';
 
 function Meals() {
   const { meals } = useContext(RecipesContext);
@@ -27,7 +27,7 @@ function Meals() {
   return (
     <div>
       <Header />
-      <MealsCategorys categoryFilter={ categoryFilter } />
+      <MealsCategories categoryFilter={ categoryFilter } />
       {
         filterMeals && filterMeals.length > 0 && filterMeals
           .slice(0, limit).map((meal, index) => (
