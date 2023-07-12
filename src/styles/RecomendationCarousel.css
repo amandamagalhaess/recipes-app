@@ -1,0 +1,15 @@
+.carousel {
+  display: flex;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.carousel img {
+  height: 160px;
+  margin: 0 10px;
+  width: 160px;
+}

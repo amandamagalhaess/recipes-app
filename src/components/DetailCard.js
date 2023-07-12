@@ -6,6 +6,7 @@ function DetailCard(
   { image, name, category, ingredients, measures, instructions, video },
 ) {
   const location = useLocation();
+
   return (
     <div>
       <img src={ image } alt={ name } data-testid="recipe-photo" />

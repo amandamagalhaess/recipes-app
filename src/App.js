@@ -7,6 +7,7 @@ import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Recipes from './pages/Recipes';
 import RecipeDetails from './pages/RecipeDetails';
+import './styles/App.css';
 
 function App() {
   return (

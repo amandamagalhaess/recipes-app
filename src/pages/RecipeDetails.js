@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchDrinkById, fetchMealById } from '../service/FetchAPI';
 import DetailCard from '../components/DetailCard';
+import RecommendationCarousel from '../components/RecomendationCarousel';
 
 function RecipeDetails() {
   const { id } = useParams();
@@ -59,6 +60,7 @@ function RecipeDetails() {
           />
         )
       )}
+      <RecommendationCarousel />
     </div>
 
   );
