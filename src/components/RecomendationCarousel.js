@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import RecipesContext from '../context/RecipesContext';
 import '../styles/RecomendationCarousel.css';
+import StartRecipe from './StartRecipe';
 
 function RecommendationCarousel() {
   const { meals, drinks } = useContext(RecipesContext);
@@ -58,7 +59,11 @@ function RecommendationCarousel() {
           <button onClick={ handleScrollNext }>Próxima</button>
         </>
       )}
+      <div>
+        <StartRecipe />
+      </div>
     </div>
+
   );
 }
 
