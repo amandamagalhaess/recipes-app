@@ -41,6 +41,15 @@ function RecipeDetails() {
     fetchRecipe();
   }, [id, location.pathname]);
 
+  useEffect(() => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    if (favoriteRecipes.some((favorite) => favorite.id === id)) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }, [id]);
+
   const handleShareButton = () => {
     const { pathname } = location;
     const url = `http://localhost:3000${pathname}`;
