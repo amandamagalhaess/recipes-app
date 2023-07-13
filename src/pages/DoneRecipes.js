@@ -64,11 +64,14 @@ export default function DoneRecipes() {
 
       {doneRecipes.map((recipe, index) => (
         <div id="divDoneRecipes" key={ recipe.id }>
-          <img
-            src={ recipe.image }
-            alt={ recipe.name }
-            data-testid={ `${index}-horizontal-image` }
-          />
+          <a href={ `/${recipe.type}s/${recipe.id} ` }>
+            <img
+              src={ recipe.image }
+              alt={ recipe.name }
+              data-testid={ `${index}-horizontal-image` }
+            />
+
+          </a>
           {recipe.type === 'drink' ? (
             <p data-testid={ `${index}-horizontal-top-text` }>
               {recipe.alcoholicOrNot}
@@ -82,10 +85,11 @@ export default function DoneRecipes() {
               {recipe.category}
             </p>
           )}
-
-          <p data-testid={ `${index}-horizontal-name` }>
-            {recipe.name}
-          </p>
+          <a href={ `/${recipe.type}s/${recipe.id} ` }>
+            <p data-testid={ `${index}-horizontal-name` }>
+              {recipe.name}
+            </p>
+          </a>
 
           <p data-testid={ `${index}-horizontal-done-date` }>
             {recipe.doneDate}
