@@ -1,16 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import ShareButton from './ShareButton';
 import FavoriteButton from './FavoriteButton';
 
 function DetailCardInProgress(
-  { id, image, name, category, ingredients, measures,
+  { recipe, id, image, name, category, ingredients, measures,
     instructions, video },
 ) {
   const location = useLocation();
   const history = useHistory();
   const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+    if (inProgressRecipes) {
+      if (location.pathname.includes('meals')) {
+        const checked = inProgressRecipes.meals[id];
+        setSelectedIngredients(checked);
+      } else {
+        const checked = inProgressRecipes.drinks[id];
+        setSelectedIngredients(checked);
+      }
+    }
+  }, [id, location.pathname]);
+
+  useEffect(() => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    if (favoriteRecipes.some((favorite) => favorite.id === id)) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }, [id, setIsFavorite]);
 
   const handleClick = () => {
     // const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -83,6 +107,7 @@ function DetailCardInProgress(
               <input
                 type="checkbox"
                 onChange={ (event) => handleChange(event, index) }
+                checked={ selectedIngredients.includes(ingredient[1]) }
               />
               {`${ingredient[1]} - ${measures[index][1]}`}
             </label>
@@ -102,7 +127,11 @@ function DetailCardInProgress(
         )
       }
       <ShareButton />
-      <FavoriteButton />
+      <FavoriteButton
+        recipe={ recipe }
+        isFavorite={ isFavorite }
+        setIsFavorite={ setIsFavorite }
+      />
       <button
         data-testid="finish-recipe-btn"
         onClick={ handleClick }
@@ -114,6 +143,8 @@ function DetailCardInProgress(
 }
 
 DetailCardInProgress.propTypes = {
+  recipe: PropTypes.objectOf(PropTypes.string).isRequired,
+  id: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
@@ -121,7 +152,6 @@ DetailCardInProgress.propTypes = {
   measures: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
   instructions: PropTypes.string.isRequired,
   video: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
 };
 
 export default DetailCardInProgress;

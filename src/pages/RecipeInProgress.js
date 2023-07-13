@@ -35,10 +35,11 @@ function RecipeInProgress() {
   }, [id, location.pathname]);
 
   return (
-    <div>
+    <div id="details-container">
       { recipe && (
         location.pathname.includes('meals') ? (
           <DetailCardInProgress
+            recipe={ recipe }
             id={ recipe.idMeal }
             image={ recipe.strMealThumb }
             name={ recipe.strMeal }
@@ -53,6 +54,7 @@ function RecipeInProgress() {
           />
         ) : (
           <DetailCardInProgress
+            recipe={ recipe }
             id={ recipe.idDrink }
             image={ recipe.strDrinkThumb }
             name={ recipe.strDrink }

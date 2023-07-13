@@ -7,7 +7,15 @@ function ShareButton() {
 
   const handleShareButton = () => {
     const { pathname } = location;
-    const url = `http://localhost:3000${pathname}`;
+
+    let url;
+
+    if (pathname.includes('in-progress')) {
+      url = `http://localhost:3000${pathname.replace('/in-progress', '')}`;
+    } else {
+      url = `http://localhost:3000${pathname}`;
+    }
+
     navigator.clipboard.writeText(url);
     const detailsContainer = document.getElementById('details-container');
     const copyLink = document.createElement('p');
