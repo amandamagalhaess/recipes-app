@@ -15,8 +15,6 @@ export default function DoneRecipes() {
   const handleShareButton = (value) => {
     const parsedValue = JSON.parse(value);
     let url;
-    console.log(parsedValue);
-
     if (parsedValue.type === 'meal') {
       url = `http://localhost:3000/meals/${parsedValue.id}`;
     } else {
@@ -30,19 +28,37 @@ export default function DoneRecipes() {
     divDoneRecipes.appendChild(copyLink);
   };
 
+  const handleFilter = ({ target }) => {
+    const storedDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+
+    if (target.dataset.testid === 'filter-by-all-btn') {
+      setDoneRecipes(storedDoneRecipes);
+    } else if (target.dataset.testid === 'filter-by-meal-btn') {
+      const doneMeals = storedDoneRecipes.filter((recipe) => recipe.type === 'meal');
+      setDoneRecipes(doneMeals);
+    } else {
+      const doneDrink = storedDoneRecipes.filter((recipe) => recipe.type === 'drink');
+      setDoneRecipes(doneDrink);
+    }
+  };
+
   return (
     <div>
       <Header />
 
-      <button type="button" data-testid="filter-by-all-btn">
+      <button
+        type="button"
+        data-testid="filter-by-all-btn"
+        onClick={ handleFilter }
+      >
         All
       </button>
 
-      <button type="button" data-testid="filter-by-meal-btn">
+      <button type="button" data-testid="filter-by-meal-btn" onClick={ handleFilter }>
         Meals
       </button>
 
-      <button type="button" data-testid="filter-by-drink-btn">
+      <button type="button" data-testid="filter-by-drink-btn" onClick={ handleFilter }>
         Drinks
       </button>
 
@@ -74,19 +90,6 @@ export default function DoneRecipes() {
           <p data-testid={ `${index}-horizontal-done-date` }>
             {recipe.doneDate}
           </p>
-
-          <button
-            type="button"
-            onClick={ () => handleShareButton(JSON.stringify(recipe)) }
-            value={ JSON.stringify(recipe) }
-          >
-            <img
-              src={ shareIcon }
-              alt=""
-              data-testid={ `${index}-horizontal-share-btn` }
-            />
-          </button>
-
           {recipe.tags.slice(0, 2).map((tag, tagIndex) => (
             <span
               key={ tagIndex }
@@ -95,6 +98,17 @@ export default function DoneRecipes() {
               {tag}
             </span>
           ))}
+          <button
+            type="button"
+            onClick={ () => handleShareButton(JSON.stringify(recipe)) }
+          >
+            <img
+              src={ shareIcon }
+              alt=""
+              data-testid={ `${index}-horizontal-share-btn` }
+            />
+          </button>
+
         </div>
       ))}
     </div>
