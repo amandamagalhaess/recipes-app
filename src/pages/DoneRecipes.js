@@ -12,6 +12,24 @@ export default function DoneRecipes() {
     }
   }, []);
 
+  const handleShareButton = (value) => {
+    const parsedValue = JSON.parse(value);
+    let url;
+    console.log(parsedValue);
+
+    if (parsedValue.type === 'meal') {
+      url = `http://localhost:3000/meals/${parsedValue.id}`;
+    } else {
+      url = `http://localhost:3000/drinks/${parsedValue.id}`;
+    }
+
+    navigator.clipboard.writeText(url);
+    const divDoneRecipes = document.getElementById('divDoneRecipes');
+    const copyLink = document.createElement('p');
+    copyLink.innerHTML = 'Link copied!';
+    divDoneRecipes.appendChild(copyLink);
+  };
+
   return (
     <div>
       <Header />
@@ -29,7 +47,7 @@ export default function DoneRecipes() {
       </button>
 
       {doneRecipes.map((recipe, index) => (
-        <div key={ recipe.id }>
+        <div id="divDoneRecipes" key={ recipe.id }>
           <img
             src={ recipe.image }
             alt={ recipe.name }
@@ -59,6 +77,8 @@ export default function DoneRecipes() {
 
           <button
             type="button"
+            onClick={ () => handleShareButton(JSON.stringify(recipe)) }
+            value={ JSON.stringify(recipe) }
           >
             <img
               src={ shareIcon }
