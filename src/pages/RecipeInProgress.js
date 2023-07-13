@@ -18,7 +18,7 @@ function RecipeInProgress() {
         setRecipe(mealDetails);
         setIngredients(Object.entries(mealDetails)
           .filter((entry) => entry[0].includes('strIngredient'))
-          .filter((entry) => entry[1] !== ''));
+          .filter((entry) => entry[1] !== '' && entry[1] !== null));
         setMeasures(Object.entries(mealDetails)
           .filter((entry) => entry[0].includes('strMeasure')));
       } else {
@@ -26,7 +26,7 @@ function RecipeInProgress() {
         setRecipe(drinkDetails);
         setIngredients(Object.entries(drinkDetails)
           .filter((entry) => entry[0].includes('strIngredient'))
-          .filter((entry) => entry[1] !== null));
+          .filter((entry) => entry[1] !== '' && entry[1] !== null));
         setMeasures(Object.entries(drinkDetails)
           .filter((entry) => entry[0].includes('strMeasure')));
       }

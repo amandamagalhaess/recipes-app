@@ -2,16 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
-function DetailCard(
-  { image, name, category, ingredients, measures, instructions, video },
-) {
+function DetailCard({ recipe, ingredients, measures }) {
   const location = useLocation();
 
   return (
     <div>
-      <img src={ image } alt={ name } data-testid="recipe-photo" />
-      <p data-testid="recipe-title">{name}</p>
-      <p data-testid="recipe-category">{category}</p>
+      <img
+        src={ recipe.strMealThumb || recipe.strDrinkThumb }
+        alt={ recipe.strMeal || recipe.strDrink }
+        data-testid="recipe-photo"
+      />
+      <p data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</p>
+      {
+        location.pathname.includes('meals') ? (
+          <p data-testid="recipe-category">{recipe.strCategory}</p>
+        ) : (
+          <p data-testid="recipe-category">{recipe.strAlcoholic}</p>
+        )
+      }
       <ul>
         {
           ingredients.map((ingredient, index) => (
@@ -24,15 +32,15 @@ function DetailCard(
           ))
         }
       </ul>
-      <p data-testid="instructions">{instructions}</p>
+      <p data-testid="instructions">{recipe.strInstructions}</p>
       {
-        location.pathname.includes('meals') && video && (
+        location.pathname.includes('meals') && recipe.strYoutube && (
           <iframe
             title="video"
             data-testid="video"
             width="320"
             height="240"
-            src={ video.replace('watch?v=', 'embed/') }
+            src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
           />
         )
       }
@@ -41,13 +49,18 @@ function DetailCard(
 }
 
 DetailCard.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  recipe: PropTypes.shape({
+    strMealThumb: PropTypes.string.isRequired,
+    strDrinkThumb: PropTypes.string.isRequired,
+    strMeal: PropTypes.string.isRequired,
+    strDrink: PropTypes.string.isRequired,
+    strCategory: PropTypes.string.isRequired,
+    strAlcoholic: PropTypes.string.isRequired,
+    strInstructions: PropTypes.string.isRequired,
+    strYoutube: PropTypes.string.isRequired,
+  }).isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
   measures: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
-  instructions: PropTypes.string.isRequired,
-  video: PropTypes.string.isRequired,
 };
 
 export default DetailCard;
