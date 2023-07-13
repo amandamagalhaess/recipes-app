@@ -47,9 +47,9 @@ function RecipeInProgress() {
             measures={ measures }
             instructions={ recipe.strInstructions }
             video={ recipe.strYoutube }
-            type="meals"
-            tags={ recipe.strTags }
-            nationality={ recipe.strArea }
+            // type="meals"
+            // tags={ recipe.strTags }
+            // nationality={ recipe.strArea }
           />
         ) : (
           <DetailCardInProgress
@@ -60,9 +60,9 @@ function RecipeInProgress() {
             ingredients={ ingredients }
             measures={ measures }
             instructions={ recipe.strInstructions }
-            type="drinks"
-            tags={ recipe.strTags }
-            alcoholicOrNot={ recipe.strAlcoholic }
+            // type="drinks"
+            // tags={ recipe.strTags }
+            // alcoholicOrNot={ recipe.strAlcoholic }
           />
         )
       )}

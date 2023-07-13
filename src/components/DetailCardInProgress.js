@@ -5,8 +5,8 @@ import ShareButton from './ShareButton';
 import FavoriteButton from './FavoriteButton';
 
 function DetailCardInProgress(
-  { image, name, category, ingredients, measures,
-    instructions, video, id },
+  { id, image, name, category, ingredients, measures,
+    instructions, video },
 ) {
   const location = useLocation();
   const history = useHistory();
@@ -37,7 +37,13 @@ function DetailCardInProgress(
 
   const handleChange = (event, index) => {
     const { checked } = event.target;
-    console.log(checked);
+
+    if (checked) {
+      event.target.parentElement.style.textDecoration = 'line-through';
+    } else {
+      event.target.parentElement.style.textDecoration = 'none';
+    }
+
     const inProgressRecipes = JSON.parse(localStorage
       .getItem('inProgressRecipes')) || { meals: {}, drinks: {} };
     if (checked && location.pathname.includes('meals')) {
@@ -45,6 +51,7 @@ function DetailCardInProgress(
     } else if (checked && location.pathname.includes('drinks')) {
       inProgressRecipes.drinks[id] = [...selectedIngredients, ingredients[index][1]];
     }
+
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
     setSelectedIngredients([...selectedIngredients, ingredients[index][1]]);
 
