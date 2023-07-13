@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import { renderWithRouter } from './helpers/renderWithRouter';
 
+const filterByMeal = 'filter-by-meal-btn';
+
 describe('Testa a página DoneRecipes', () => {
   localStorage.setItem('favoriteRecipes', JSON.stringify([
     {
@@ -29,7 +31,7 @@ describe('Testa a página DoneRecipes', () => {
   });
   it('Testa se a página contém os elementos esperados', () => {
     const filterByAllBtn = screen.getByTestId('filter-by-all-btn');
-    const filterByFoodBtn = screen.getByTestId('filter-by-meal-btn');
+    const filterByFoodBtn = screen.getByTestId(filterByMeal);
     const filterByDrinkBtn = screen.getByTestId('filter-by-drink-btn');
 
     expect(filterByAllBtn).toBeInTheDocument();
@@ -95,7 +97,7 @@ describe('Testa a página DoneRecipes', () => {
   });
 
   it('Testa se ao clicar no botão meals apenas as receitas de comida são exibidas', () => {
-    const filterByFoodBtn = screen.getByTestId('filter-by-meal-btn');
+    const filterByFoodBtn = screen.getByTestId(filterByMeal);
     expect(filterByFoodBtn).toBeInTheDocument();
 
     userEvent.click(filterByFoodBtn);
@@ -136,7 +138,7 @@ describe('Testa a página DoneRecipes', () => {
     expect(image2).toHaveLength(2);
   });
   it('Testa se ao clicar no botão de favorite a receita é removidada da tela', () => {
-    const filterByFoodBtn = screen.getByTestId('filter-by-meal-btn');
+    const filterByFoodBtn = screen.getByTestId(filterByMeal);
     expect(filterByFoodBtn).toBeInTheDocument();
 
     userEvent.click(filterByFoodBtn);
