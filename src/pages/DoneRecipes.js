@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
+import shareIcon from '../images/shareIcon.svg';
 
 export default function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -28,16 +29,25 @@ export default function DoneRecipes() {
       </button>
 
       {doneRecipes.map((recipe, index) => (
-        <div key={ index }>
+        <div key={ recipe.id }>
           <img
             src={ recipe.image }
             alt={ recipe.name }
             data-testid={ `${index}-horizontal-image` }
           />
-
-          <p data-testid={ `${index}-horizontal-top-text` }>
-            {recipe.category}
-          </p>
+          {recipe.type === 'drink' ? (
+            <p data-testid={ `${index}-horizontal-top-text` }>
+              {recipe.alcoholicOrNot}
+            </p>
+          ) : (
+            <p data-testid={ `${index}-horizontal-top-text` }>
+              {recipe.nationality}
+              {' '}
+              -
+              {' '}
+              {recipe.category}
+            </p>
+          )}
 
           <p data-testid={ `${index}-horizontal-name` }>
             {recipe.name}
@@ -49,12 +59,15 @@ export default function DoneRecipes() {
 
           <button
             type="button"
-            data-testid={ `${index}-horizontal-share-btn` }
           >
-            Share
+            <img
+              src={ shareIcon }
+              alt=""
+              data-testid={ `${index}-horizontal-share-btn` }
+            />
           </button>
 
-          {recipe.tags.map((tag, tagIndex) => (
+          {recipe.tags.slice(0, 2).map((tag, tagIndex) => (
             <span
               key={ tagIndex }
               data-testid={ `${index}-${tag}-horizontal-tag` }
