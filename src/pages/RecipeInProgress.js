@@ -36,38 +36,13 @@ function RecipeInProgress() {
 
   return (
     <div id="details-container">
-      { recipe && (
-        location.pathname.includes('meals') ? (
-          <DetailCardInProgress
-            recipe={ recipe }
-            id={ recipe.idMeal }
-            image={ recipe.strMealThumb }
-            name={ recipe.strMeal }
-            category={ recipe.strCategory }
-            ingredients={ ingredients }
-            measures={ measures }
-            instructions={ recipe.strInstructions }
-            video={ recipe.strYoutube }
-            // type="meals"
-            // tags={ recipe.strTags }
-            // nationality={ recipe.strArea }
-          />
-        ) : (
-          <DetailCardInProgress
-            recipe={ recipe }
-            id={ recipe.idDrink }
-            image={ recipe.strDrinkThumb }
-            name={ recipe.strDrink }
-            category={ recipe.strCategory }
-            ingredients={ ingredients }
-            measures={ measures }
-            instructions={ recipe.strInstructions }
-            // type="drinks"
-            // tags={ recipe.strTags }
-            // alcoholicOrNot={ recipe.strAlcoholic }
-          />
-        )
-      )}
+      {
+        recipe && <DetailCardInProgress
+          recipe={ recipe }
+          ingredients={ ingredients }
+          measures={ measures }
+        />
+      }
     </div>
 
   );
