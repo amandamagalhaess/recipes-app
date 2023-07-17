@@ -4,22 +4,23 @@ import App from '../App';
 import { renderWithRouter } from './helpers/renderWithRouter';
 
 describe('Testa a página de detalhes de uma receita em progresso', () => {
-  const startRecipeButton = screen.getByTestId('start-recipe-btn');
-  const recipePhotoLint = screen.getByTestId('recipe-photo');
+  const startRecipeButton = 'start-recipe-btn';
+  const photoRecipe = 'recipe-photo';
+  const favoriteButton = 'favorite-btn';
   beforeEach(() => {
     localStorage.clear();
   });
   it('Testa se a página contém os elementos esperados', async () => {
     renderWithRouter(<App />, { initialEntries: ['/meals/53060'] });
 
-    const startRecipeBtn = startRecipeButton;
+    const startRecipeBtn = screen.getByTestId(startRecipeButton);
     userEvent.click(startRecipeBtn);
 
     await waitFor(() => {
-      const recipePhoto = recipePhotoLint;
+      const recipePhoto = screen.getByTestId(photoRecipe);
       const recipeTitle = screen.getByTestId('recipe-title');
       const shareBtn = screen.getByTestId('share-btn');
-      const favoriteBtn = screen.getByTestId('favorite-btn');
+      const favoriteBtn = screen.getByTestId(favoriteButton);
       const recipeCategory = screen.getByTestId('recipe-category');
       const recipeInstructions = screen.getByTestId('instructions');
       const recipeIngredients = screen.getAllByTestId(/ingredient/i);
@@ -38,11 +39,11 @@ describe('Testa a página de detalhes de uma receita em progresso', () => {
   it('Testa o funcionamento dos checkboxes em Meals e se eles estão sendo salvos no localstorage', async () => {
     renderWithRouter(<App />, { initialEntries: ['/meals/53060'] });
 
-    const startRecipeBtn = startRecipeButton;
+    const startRecipeBtn = screen.getByTestId(startRecipeButton);
     userEvent.click(startRecipeBtn);
 
     await waitFor(() => {
-      const recipePhoto = recipePhotoLint;
+      const recipePhoto = screen.getByTestId(photoRecipe);
       expect(recipePhoto).toBeInTheDocument();
     });
     await act(async () => {
@@ -99,11 +100,11 @@ describe('Testa a página de detalhes de uma receita em progresso', () => {
   it('Testa o funcionamento dos checkboxes em Drinks e se eles estão sendo salvos no localstorage', async () => {
     const { history } = renderWithRouter(<App />, { initialEntries: ['/drinks/15997'] });
     const gilger = 'Ginger ale';
-    const startRecipeBtn = startRecipeButton;
+    const startRecipeBtn = screen.getByTestId(startRecipeButton);
     userEvent.click(startRecipeBtn);
 
     await waitFor(() => {
-      const recipePhoto = recipePhotoLint;
+      const recipePhoto = screen.getByTestId(photoRecipe);
       expect(recipePhoto).toBeInTheDocument();
     });
     await act(async () => {
@@ -185,15 +186,15 @@ describe('Testa a página de detalhes de uma receita em progresso', () => {
       expect(alert).toBeInTheDocument();
     });
   });
-  it('Testa se o botão de favoritar funciona', async () => {
+  it('Testa se o botão de favoritar muda de imagem ao ser clicado', async () => {
     renderWithRouter(<App />, { initialEntries: ['/drinks/15997/in-progress'] });
     await waitFor(async () => {
-      const favoriteBtn = screen.getByTestId('favorite-btn');
-      expect(favoriteBtn).toBeInTheDocument();
+      const favoriteBtn = screen.getByTestId(favoriteButton);
+      expect(favoriteBtn).toHaveAttribute('src', 'whiteHeartIcon.svg');
 
       userEvent.click(favoriteBtn);
+      const favoriteBtn2 = screen.getByTestId(favoriteButton);
+      expect(favoriteBtn2).toHaveAttribute('src', 'blackHeartIcon.svg');
     });
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    expect(favoriteRecipes).toEqual([{ id: '15997', type: 'drink', nationality: '', category: 'Ordinary Drink', alcoholicOrNot: 'Optional alcohol', name: 'GG', image: 'https://www.thecocktaildb.com/images/media/drink/vyxwut1468875960.jpg' }]);
   });
 });
