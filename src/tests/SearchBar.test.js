@@ -50,7 +50,7 @@ describe('Testa o componente Search Bar', () => {
 
     const recipeName = screen.getByTestId('0-card-name');
     expect(recipeName).toBeInTheDocument();
-    /* expect(recipeName.innerHTML).toBe('A True Amaretto Sour'); */
+    // expect(recipeName.innerHTML).toBe('A True Amaretto Sour');
   });
 
   it('Testa se quando a API retornar apenas uma receita na página de Meals o usuário é redirecionado para a tela de detalhes', async () => {

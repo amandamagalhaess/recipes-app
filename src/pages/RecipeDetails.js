@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchDrinkById, fetchMealById } from '../service/FetchAPI';
 import DetailCard from '../components/DetailCard';
-import RecommendationCarousel from '../components/RecomendationCarousel';
+import RecommendationCarousel from '../components/RecommendationCarousel';
 import StartRecipe from '../components/StartRecipe';
 import ContinueRecipe from '../components/ContinueRecipe';
 import ShareButton from '../components/ShareButton';
