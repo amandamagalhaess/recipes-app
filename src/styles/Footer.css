@@ -1,4 +1,23 @@
 footer {
+  align-items: center;
+  background-color: #41197f;
   bottom: 0;
+  display: flex;
+  height: 45px;
+  justify-content: space-between;
   position: fixed;
+  width: 100%;
+}
+
+.mealIcon {
+  height: 29.53px;
+  padding-right: 7vh;
+  width: 40.33px;
+}
+
+
+.drinkIcon {
+  height: 24.61px;
+  padding-left: 7vh;
+  width: 25.12px;
 }
