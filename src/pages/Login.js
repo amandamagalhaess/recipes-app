@@ -1,6 +1,9 @@
 import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
+import '../styles/Login.css';
+import logo from '../images/logo.svg';
+import tomato from '../images/tomato.svg';
 
 function Login() {
   const {
@@ -29,28 +32,35 @@ function Login() {
   };
 
   return (
-    <div>
-      <input
-        type="email"
-        data-testid="email-input"
-        name="email"
-        placeholder="E-mail"
-        onChange={ (e) => { setEmail(e.target.value); } }
-      />
-      <input
-        type="password"
-        data-testid="password-input"
-        name="password"
-        placeholder="Senha"
-        onChange={ (e) => { setPassword(e.target.value); } }
-      />
-      <button
-        data-testid="login-submit-btn"
-        disabled={ isButtonDisabled }
-        onClick={ handleClick }
-      >
-        Enter
-      </button>
+    <div className="login-page">
+      <img src={ logo } alt="logo" className="logo" />
+      <img src={ tomato } alt="" className="tomato" />
+      <div className="login-form">
+        <p>LOGIN</p>
+        <div className="login-inputs">
+          <input
+            type="email"
+            data-testid="email-input"
+            name="email"
+            placeholder="Email"
+            onChange={ (e) => { setEmail(e.target.value); } }
+          />
+          <input
+            type="password"
+            data-testid="password-input"
+            name="password"
+            placeholder="Password"
+            onChange={ (e) => { setPassword(e.target.value); } }
+          />
+          <button
+            data-testid="login-submit-btn"
+            disabled={ isButtonDisabled }
+            onClick={ handleClick }
+          >
+            Enter
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
