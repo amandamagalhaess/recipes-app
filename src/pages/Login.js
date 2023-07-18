@@ -37,7 +37,7 @@ function Login() {
       <img src={ tomato } alt="" className="tomato" />
       <div className="login-form">
         <p>LOGIN</p>
-        <div className="login-inputs">
+        <form className="login-inputs">
           <input
             type="email"
             data-testid="email-input"
@@ -53,13 +53,14 @@ function Login() {
             onChange={ (e) => { setPassword(e.target.value); } }
           />
           <button
+            type="submit"
             data-testid="login-submit-btn"
             disabled={ isButtonDisabled }
             onClick={ handleClick }
           >
             Enter
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
