@@ -1,0 +1,37 @@
+.categories-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 19.3px;
+  margin-top: 10px;
+}
+
+.categories-container button {
+  align-items: center;
+  color: #797d86;
+  display: flex;
+  flex-direction: column;
+  font-family: Epilogue , sans-serif;
+  font-size: 9px;
+  font-weight: 300;
+  height: 73px;
+  line-height: normal;
+  text-align: center;
+  width: 53.431px;
+}
+
+.categories-container button div {
+  align-items: center;
+  border: 2px solid #fcc436;
+  border-radius: 45.28px;
+  display: flex;
+  height: 45.28px;
+  justify-content: center;
+  margin-bottom: 5.4px;
+  width: 45.28px;
+}
+
+.categories-container button img {
+  height: 22.532px;
+  width: 30.774px;
+}

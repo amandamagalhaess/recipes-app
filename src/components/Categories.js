@@ -3,11 +3,26 @@ import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import RecipesContext from '../context/RecipesContext';
 import { fetchMealsByCategory, fetchAllMeals,
   fetchDrinksByCategory, fetchAllDrinks } from '../service/FetchAPI';
+import '../styles/Categories.css';
+import mealIcon from '../images/mealIcon.svg';
+import drinkIcon from '../images/drinkIcon.svg';
+import beefIcon from '../images/beefIcon.svg';
+import breakfastIcon from '../images/breakfastIcon.svg';
+import chickenIcon from '../images/chickenIcon.svg';
+import dessertIcon from '../images/dessertIcon.svg';
+import goatIcon from '../images/goatIcon.svg';
+import ordinaryIcon from '../images/ordinaryDrinkIcon.svg';
+import cocktailIcon from '../images/cocktailIcon.svg';
+import shakeIcon from '../images/shakeIcon.svg';
+import otherIcon from '../images/otherIcon.svg';
+import cocoaIcon from '../images/cocoaIcon.svg';
 
 function Categories() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+
   const location = useLocation();
+
   const { setMeals, setDrinks } = useContext(RecipesContext);
   const magicNumber = 5;
 
@@ -58,8 +73,44 @@ function Categories() {
     }
   };
 
+  const renderImage = (category) => {
+    switch (category) {
+    case 'Beef':
+      return beefIcon;
+    case 'Breakfast':
+      return breakfastIcon;
+    case 'Chicken':
+      return chickenIcon;
+    case 'Dessert':
+      return dessertIcon;
+    case 'Goat':
+      return goatIcon;
+    case 'Ordinary Drink':
+      return ordinaryIcon;
+    case 'Cocktail':
+      return cocktailIcon;
+    case 'Shake':
+      return shakeIcon;
+    case 'Other / Unknown':
+      return otherIcon;
+    case 'Cocoa':
+      return cocoaIcon;
+    default:
+    }
+  };
+
   return (
-    <div>
+    <div className="categories-container">
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        onClick={ handleAllButton }
+      >
+        <div>
+          <img src={ location.pathname === '/meals' ? mealIcon : drinkIcon } alt="" />
+        </div>
+        All
+      </button>
       {categories && categories.slice(0, magicNumber).map((category) => (
         <button
           key={ category.strCategory }
@@ -67,16 +118,12 @@ function Categories() {
           onClick={ () => handleCategoryFilter(category.strCategory) }
           data-testid={ `${category.strCategory}-category-filter` }
         >
+          <div>
+            <img src={ renderImage(category.strCategory) } alt="" />
+          </div>
           {category.strCategory}
         </button>
       ))}
-      <button
-        data-testid="All-category-filter"
-        type="button"
-        onClick={ handleAllButton }
-      >
-        All
-      </button>
     </div>
   );
 }

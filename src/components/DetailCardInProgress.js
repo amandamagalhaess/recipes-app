@@ -67,7 +67,7 @@ function DetailCardInProgress({ recipe, ingredients, measures }) {
     const { checked } = event.target;
 
     if (checked) {
-      event.target.parentElement.style.textDecoration = 'line-through';
+      event.target.parentElement.style.textDecoration = 'line-through solid rgb(0, 0, 0)';
     } else {
       event.target.parentElement.style.textDecoration = 'none';
     }

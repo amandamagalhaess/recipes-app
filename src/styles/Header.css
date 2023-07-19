@@ -2,7 +2,7 @@ header {
   align-items: center;
   background-color: #fcdc36;
   display: flex;
-  height: 45px;
+  height: 52px;
   justify-content: space-between;
   width: 100%;
 }
@@ -10,30 +10,25 @@ header {
 .leftIcons {
   align-items: center;
   display: flex;
-  margin: 0 3vh;
+  margin-left: 26px;
+}
+
+.recipeIcon {
+  height: 39.28px;
+  margin-right: 20.76px;
+  width: 42.6px;
+}
+
+.logoIcon {
+  height: 17px;
+  margin-top: 8px;
+  width: 110px;
 }
 
 .rightIcons {
   align-items: center;
   display: flex;
-  margin: 0 3vh;
-}
-
-.profileIcon, .searchIcon {
-  height: 28.71px;
-  width: 28.71px;
-}
-
-.recipeIcon {
-  height: 39.28px;
-  margin-right: 3vh;
-  width: 42.6px;
-}
-
-
-.logoIcon {
-  height: 17px;
-  width: 110px;
+  margin-right: 21.3px;
 }
 
 .searchIconBtn {
@@ -42,22 +37,31 @@ header {
   padding: 0;
 }
 
+.searchIcon {
+  height: 26.85px;
+  margin-right: 16.15px;
+  width: 26.845px;
+}
+
 .profileIcon {
-  margin-left: 2vh;
+  height: 28.71px;
+  width: 28.71px;
 }
 
 .MealOrDrinkContainer {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 4vh;
-
+  margin-top: 31px;
 }
 
-h1 {
+.MealOrDrinkContainer h1 {
   color: #41197f;
   font-family: Epilogue , sans-serif;
-  font-weight: 800;
-  margin-top: 2vh;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 2.1px;
+  line-height: normal;
+  text-align: center;
   text-transform: uppercase;
 }

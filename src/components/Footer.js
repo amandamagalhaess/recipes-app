@@ -1,6 +1,6 @@
 import React from 'react';
-import mealIcon from '../images/icone-prato.png';
-import drinkIcon from '../images/icone-bebida.png';
+import mealIcon from '../images/mealIcon.svg';
+import drinkIcon from '../images/drinkIcon.svg';
 import '../styles/Footer.css';
 
 export default function Footer() {

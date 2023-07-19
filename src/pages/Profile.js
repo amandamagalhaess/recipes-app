@@ -3,9 +3,9 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/Profile.css';
-import favIcon from '../images/favIcon.png';
-import doneIcon from '../images/doneRecipesIcon.png';
-import logoutIcon from '../images/logoutIcon.png';
+import favIcon from '../images/favoritesIcon.svg';
+import doneIcon from '../images/doneRecipesIcon.svg';
+import logoutIcon from '../images/logoutIcon.svg';
 
 export default function Profile() {
   const history = useHistory();

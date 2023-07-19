@@ -15,31 +15,33 @@ function Recipes() {
     <div>
       <Header />
       <Categories />
-      {
-        location.pathname === '/meals' ? (
-          meals && meals.length > 0 && meals
-            .slice(0, limit).map((meal, index) => (
-              <Card
-                key={ meal.idMeal }
-                id={ meal.idMeal }
-                image={ meal.strMealThumb }
-                name={ meal.strMeal }
-                index={ index }
-              />
-            ))
-        ) : (
-          drinks && drinks.length > 0 && drinks
-            .slice(0, limit).map((drink, index) => (
-              <Card
-                key={ drink.idDrink }
-                id={ drink.idDrink }
-                image={ drink.strDrinkThumb }
-                name={ drink.strDrink }
-                index={ index }
-              />
-            ))
-        )
-      }
+      <div className="recipes-container">
+        {
+          location.pathname === '/meals' ? (
+            meals && meals.length > 0 && meals
+              .slice(0, limit).map((meal, index) => (
+                <Card
+                  key={ meal.idMeal }
+                  id={ meal.idMeal }
+                  image={ meal.strMealThumb }
+                  name={ meal.strMeal }
+                  index={ index }
+                />
+              ))
+          ) : (
+            drinks && drinks.length > 0 && drinks
+              .slice(0, limit).map((drink, index) => (
+                <Card
+                  key={ drink.idDrink }
+                  id={ drink.idDrink }
+                  image={ drink.strDrinkThumb }
+                  name={ drink.strDrink }
+                  index={ index }
+                />
+              ))
+          )
+        }
+      </div>
       <Footer />
     </div>
   );

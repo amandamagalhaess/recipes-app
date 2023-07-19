@@ -1,16 +1,16 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import profileIcon from '../images/icone-perfil.png';
-import searchIcon from '../images/icone pesquiar.png';
+import profileIcon from '../images/profileIcon2.svg';
+import searchIcon from '../images/searchIcon2.svg';
 import SearchBar from './SearchBar';
 import '../styles/Header.css';
-import iconeRecipes from '../images/ícone Recipes app.png';
-import logoRecipes from '../images/logo Recipes app.png';
-import plateIcon from '../images/icone-prato.png';
-import drinkIcon from '../images/icone-bebida.png';
-import favIcon from '../images/favIcon.png';
-import perfilYellow from '../images/perfilYellow.png';
-import doneRecipesIcon from '../images/doneRecipesIcon.png';
+import recipesAppIcon from '../images/recipesAppIcon.svg';
+import recipesAppLogo from '../images/recipesAppLogo.svg';
+import mealIcon from '../images/mealIcon.svg';
+import drinkIcon from '../images/drinkIcon.svg';
+import favoritesIcon from '../images/favoritesIcon.svg';
+import profilePageIcon from '../images/profilePageIcon.svg';
+import doneRecipesIcon from '../images/doneRecipesIcon.svg';
 
 export default function Header() {
   const location = useLocation();
@@ -53,9 +53,17 @@ export default function Header() {
 
   const renderImage = () => {
     if (getTitle() === 'Meals') {
-      return <img src={ plateIcon } alt="" style={ { width: '40px', height: '30px' } } />;
+      return (<img
+        src={ mealIcon }
+        alt=""
+        style={ { width: '40px', height: '30px' } }
+      />);
     } if (getTitle() === 'Drinks') {
-      return <img src={ drinkIcon } alt="" style={ { width: '25px', height: '26px' } } />;
+      return (<img
+        src={ drinkIcon }
+        alt=""
+        style={ { width: '25px', height: '26px' } }
+      />);
     } if (getTitle() === 'Done Recipes') {
       return (<img
         src={ doneRecipesIcon }
@@ -63,10 +71,14 @@ export default function Header() {
         style={ { width: '40px', height: '39px' } }
       />);
     } if (getTitle() === 'Favorite Recipes') {
-      return <img src={ favIcon } alt="" style={ { width: '39px', height: '39px' } } />;
+      return (<img
+        src={ favoritesIcon }
+        alt=""
+        style={ { width: '39px', height: '39px' } }
+      />);
     } if (getTitle() === 'Profile') {
       return (<img
-        src={ perfilYellow }
+        src={ profilePageIcon }
         alt=""
         style={ { width: '30px', height: '30px' } }
       />);
@@ -78,8 +90,8 @@ export default function Header() {
     <div>
       <header>
         <div className="leftIcons">
-          <img className="recipeIcon" src={ iconeRecipes } alt="" />
-          <img className="logoIcon" src={ logoRecipes } alt="" />
+          <img className="recipeIcon" src={ recipesAppIcon } alt="" />
+          <img className="logoIcon" src={ recipesAppLogo } alt="" />
         </div>
         <div className="rightIcons">
           { showSearchIcon && (
