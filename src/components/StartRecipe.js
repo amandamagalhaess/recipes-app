@@ -13,7 +13,7 @@ function StartRecipe() {
       onClick={ handleClick }
       data-testid="start-recipe-btn"
     >
-      Start Recipe
+      START RECIPE
     </button>
   );
 }

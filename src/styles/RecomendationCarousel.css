@@ -1,5 +1,6 @@
 .carousel {
   display: flex;
+  margin: 0 5px;
   -webkit-overflow-scrolling: touch;
   overflow-x: scroll;
   scroll-behavior: smooth;
@@ -8,16 +9,26 @@
   width: 100%;
 }
 
-.carousel img {
-  height: 160px;
-  margin: 0 12px;
-  width: 160px;
+.card-carousel {
+  border: 0.518px solid #b1b1b1;
+  border-radius: 5px;
+  margin: 0 6px;
 }
 
-.btnStart {
-  bottom: 0;
-  margin: 0 12px 12px 0;
-  position: fixed;
-  right: 0;
-  z-index: 1;
+.carousel img {
+  height: 134.846px;
+  width: 163.346px;
+}
+
+.carousel p {
+  color: #1a1b1c;
+  font-family: Epilogue , sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 5px 0 5px 10px;
+}
+
+.carousel-main-container {
+  height: 260px;
 }

@@ -24,7 +24,7 @@ function RecommendationCarousel() {
   };
 
   return (
-    <div>
+    <div className="carousel-main-container">
       { meals.length > 0 && drinks.length > 0 && (
         <>
           <button onClick={ handleScrollPrev }>Anterior</button>
@@ -34,6 +34,7 @@ function RecommendationCarousel() {
               const cardIndex = (startIndex + index) % totalCards;
               return (
                 <div
+                  className="card-carousel"
                   key={ cardIndex }
                   data-testid={ `${cardIndex}-recommendation-card` }
                 >

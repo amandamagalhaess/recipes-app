@@ -28,7 +28,7 @@ function ShareButton() {
       data-testid="share-btn"
       onClick={ handleShareButton }
     >
-      <img src={ shareIcon } alt="" />
+      <img src={ shareIcon } alt="" className="share-btn" />
     </button>
   );
 }
