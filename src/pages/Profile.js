@@ -19,42 +19,44 @@ export default function Profile() {
   };
 
   return (
-    <>
+    <div>
       <Header />
-      <p data-testid="profile-email" className="email">{getEmail()}</p>
-      <div className="mainContainer">
-        <div className="perfilsContainer">
-          <img src={ doneIcon } alt="" className="Icons" />
-          <button
-            data-testid="profile-done-btn"
-            onClick={ () => history.push('/done-recipes') }
-          >
-            Done Recipes
-          </button>
-        </div>
-        <div className="perfilsContainer favoriteRecipe">
-          <img src={ favIcon } alt="" className="Icons" />
-          <button
-            data-testid="profile-favorite-btn"
-            onClick={ () => history.push('/favorite-recipes') }
-          >
-            Favorite Recipes
-          </button>
-        </div>
-        <div className="perfilsContainer">
-          <img src={ logoutIcon } alt="" className="Icons" />
-          <button
-            data-testid="profile-logout-btn"
-            onClick={ () => {
-              localStorage.clear();
-              history.push('/');
-            } }
-          >
-            Logout
-          </button>
+      <div className="profile-container">
+        <p data-testid="profile-email" className="email">{getEmail()}</p>
+        <div className="mainContainer">
+          <div className="profile-navigation">
+            <img src={ doneIcon } alt="" />
+            <button
+              data-testid="profile-done-btn"
+              onClick={ () => history.push('/done-recipes') }
+            >
+              Done Recipes
+            </button>
+          </div>
+          <div className="profile-navigation favoriteRecipe">
+            <img src={ favIcon } alt="" />
+            <button
+              data-testid="profile-favorite-btn"
+              onClick={ () => history.push('/favorite-recipes') }
+            >
+              Favorite Recipes
+            </button>
+          </div>
+          <div className="profile-navigation">
+            <img src={ logoutIcon } alt="" />
+            <button
+              data-testid="profile-logout-btn"
+              onClick={ () => {
+                localStorage.clear();
+                history.push('/');
+              } }
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
