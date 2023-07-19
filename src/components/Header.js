@@ -43,7 +43,7 @@ export default function Header() {
     const searchContent = document.querySelector('[data-testid="search-content"]');
 
     if (searchContent.style.display === 'none') {
-      searchContent.style.display = 'block';
+      searchContent.style.display = 'flex';
       searchInput.dataset.testid = 'search-input';
     } else {
       searchContent.style.display = 'none';
