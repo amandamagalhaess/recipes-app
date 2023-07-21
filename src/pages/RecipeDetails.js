@@ -7,7 +7,7 @@ import StartRecipe from '../components/StartRecipe';
 import ContinueRecipe from '../components/ContinueRecipe';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
-import '../styles/RecipeDetail.css';
+import '../styles/RecipeDetails.css';
 
 function RecipeDetails() {
   const { id } = useParams();
@@ -51,20 +51,24 @@ function RecipeDetails() {
   }, [id, setIsFavorite]);
 
   return (
-    <div id="details-container">
-      <ShareButton />
-      <FavoriteButton
-        recipe={ recipe }
-        isFavorite={ isFavorite }
-        setIsFavorite={ setIsFavorite }
-      />
+    <div className="details-page" id="details-container">
       { recipe && <DetailCard
         recipe={ recipe }
         ingredients={ ingredients }
         measures={ measures }
       />}
-      <h1> Recommended </h1>
-      <RecommendationCarousel />
+      <div className="share-fav-btn">
+        <ShareButton />
+        <FavoriteButton
+          recipe={ recipe }
+          isFavorite={ isFavorite }
+          setIsFavorite={ setIsFavorite }
+        />
+      </div>
+      <div className="recommended-container">
+        <h1> Recommended </h1>
+        <RecommendationCarousel />
+      </div>
 
       {
         localStorage.getItem('inProgressRecipes') && JSON

@@ -1,0 +1,160 @@
+.details-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-title-container {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3)
+  0%, rgba(0, 0, 0, 0.3) 100%) , #747474 -2.727px -97.747px
+    / 101.509% 281.998% no-repeat;
+  height: 162px;
+}
+
+.recipe-photo {
+  height: 162px;
+  object-fit: cover;
+  opacity: 0.55;
+  width: 100vw;
+}
+
+.recipe-title {
+  color: white;
+  font-family: Epilogue , sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 2.1px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  top: -110px;
+}
+
+.recipe-category {
+  align-items: center;
+  display: flex;
+  margin-left: 19px;
+  position: absolute;
+  top: 14px;
+}
+
+.recipe-category img {
+  border: 1.32px solid rgb(252, 196, 54);
+  border-radius: 25px;
+  height: 25px;
+  margin-right: 13px;
+  padding: 3px;
+  width: 25px;
+}
+
+.recipe-category p {
+  color: #fcc436;
+  font-family: Epilogue , sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.share-fav-btn {
+  display: flex;
+  position: absolute;
+  right: 30px;
+  top: 14px;
+}
+
+.share-btn {
+  height: 20px;
+  width: 20.005px;
+}
+
+.favorite-btn {
+  color: #fcc436;
+  height: 20px;
+  margin-left: 10px;
+  width: 20.005px;
+}
+
+.details-page h1 {
+  color: #1a1b1c;
+  font-family: Epilogue , sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 8px 13px;
+}
+
+.main-detail-container {
+  margin: 35px 10px;
+}
+
+.ingredients-container {
+  background: white;
+  border: 0.554px solid #b1b1b1;
+  border-radius: 5.351px;
+  margin-bottom: 33px;
+}
+
+.ingredients-container ul {
+  list-style: none;
+  padding-left: 17px;
+}
+
+.ingredients-container li {
+  color: #1a1b1c;
+  font-family: Epilogue , sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.ingredients-container li:before {
+  content: '•';
+  font-size: 14px;
+  margin-right: 6px;
+}
+
+.instructions-container {
+  background: white;
+  border: 0.554px solid #b1b1b1;
+  border-radius: 5.351px;
+  margin-bottom: 33px;
+  padding: 19px 17px 27px;
+}
+
+.instructions-container p {
+  color: #1a1b1c;
+  font-family: Epilogue , sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 113%; /* 15.82px */
+}
+
+.video-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.video-container iframe {
+  align-self: center;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.recommended-container {
+  margin: 0 10px 35px;
+}
+
+.btnStart {
+  align-self: center;
+  background: #fcc436;
+  border-radius: 5px;
+  bottom: 0;
+  color: white;
+  font-family: Epilogue , sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  height: 40px;
+  letter-spacing: 0.42px;
+  position: fixed;
+  text-align: center;
+  text-transform: uppercase;
+  width: 336px;
+}

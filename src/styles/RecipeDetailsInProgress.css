@@ -1,0 +1,39 @@
+.check-ingredients-container {
+  background: white;
+  border: 0.554px solid #b1b1b1;
+  border-radius: 5.351px;
+  margin-bottom: 33px;
+  padding: 15px 18px 4px;
+}
+
+.check-ingredients-container div {
+  margin-bottom: 11px;
+}
+
+.check-ingredients-container label {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+}
+
+.check-ingredients-container div input {
+  appearance: none;
+  border: 2px solid #fcc436;
+  border-radius: 3px;
+  height: 17px;
+  margin-right: 9px;
+  width: 17px;
+}
+
+.check-icon {
+  display: none;
+  height: 6.743px;
+  position: relative;
+  right: 22px;
+  top: 0;
+  width: 9px;
+}
+
+.check-ingredients-container div input:checked + .check-icon {
+  display: block;
+}

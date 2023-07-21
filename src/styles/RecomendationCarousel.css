@@ -1,34 +1,43 @@
+.carousel-main-container {
+  margin-bottom: 27.8px;
+}
+
 .carousel {
   display: flex;
-  margin: 0 5px;
+  gap: 12px;
   -webkit-overflow-scrolling: touch;
   overflow-x: scroll;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   white-space: nowrap;
-  width: 100%;
 }
 
 .card-carousel {
+  align-items: center;
+  background: white;
   border: 0.518px solid #b1b1b1;
   border-radius: 5px;
-  margin: 0 6px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 166.118px;
+  width: 163.204px;
 }
 
 .carousel img {
-  height: 134.846px;
+  border-radius: 5px 5px 0 0;
+  height: 134.854px;
+  position: relative;
+  top: -2px;
   width: 163.346px;
 }
 
 .carousel p {
+  align-self: flex-start;
   color: #1a1b1c;
   font-family: Epilogue , sans-serif;
   font-size: 12px;
   font-weight: 400;
   line-height: normal;
-  margin: 5px 0 5px 10px;
-}
-
-.carousel-main-container {
-  height: 260px;
+  margin: 10px 0 0 14.7px;
 }

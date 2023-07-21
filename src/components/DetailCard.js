@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
-import '../styles/RecipeDetail.css';
-/* import Dessert from '../images/Dessert.svg'; */
+import { renderDrinkImage, renderMealImage } from '../service/renderImage';
+// import drinkIcon from '../images/drinkIcon.svg';
 
 function DetailCard({ recipe, ingredients, measures }) {
   const location = useLocation();
@@ -25,20 +25,18 @@ function DetailCard({ recipe, ingredients, measures }) {
         </p>
         {
           location.pathname.includes('meals') ? (
-            <div>
-              {/*   <img src={ Dessert } alt="" /> */}
+            <div className="recipe-category">
+              <img src={ renderMealImage(recipe.strCategory) } alt="" />
               <p
-                className="category"
                 data-testid="recipe-category"
               >
                 {recipe.strCategory}
               </p>
             </div>
           ) : (
-            <div>
-              {/*   <img src={ Dessert } alt="" /> */}
+            <div className="recipe-category">
+              <img src={ renderDrinkImage(recipe.strCategory) } alt="" />
               <p
-                className="category"
                 data-testid="recipe-category"
               >
                 {recipe.strAlcoholic}
@@ -46,10 +44,9 @@ function DetailCard({ recipe, ingredients, measures }) {
             </div>
           )
         }
-
       </div>
       <div className="main-detail-container">
-        <h1 className="ingredients-title"> Ingredients </h1>
+        <h1>Ingredients</h1>
         <div className="ingredients-container">
           <ul>
             {
@@ -64,22 +61,24 @@ function DetailCard({ recipe, ingredients, measures }) {
             }
           </ul>
         </div>
-
-        <h1 className="Instructions-title"> Instructions </h1>
+        <h1>Instructions</h1>
         <div className="instructions-container">
           <p data-testid="instructions">{recipe.strInstructions}</p>
-          {
-            location.pathname.includes('meals') && recipe.strYoutube && (
+        </div>
+        {
+          location.pathname.includes('meals') && recipe.strYoutube && (
+            <div className="video-container">
+              <h1>Video</h1>
               <iframe
                 title="video"
                 data-testid="video"
-                width="320"
+                width="338"
                 height="240"
                 src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
               />
-            )
-          }
-        </div>
+            </div>
+          )
+        }
       </div>
     </div>
   );

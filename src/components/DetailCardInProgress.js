@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import ShareButton from './ShareButton';
 import FavoriteButton from './FavoriteButton';
+import { renderDrinkImage, renderMealImage } from '../service/renderImage';
+import '../styles/RecipeDetailsInProgress.css';
+import checkIcon from '../images/checkIcon.svg';
 
 function DetailCardInProgress({ recipe, ingredients, measures }) {
   const location = useLocation();
@@ -35,9 +38,16 @@ function DetailCardInProgress({ recipe, ingredients, measures }) {
   }, [recipe.idDrink, recipe.idMeal, setIsFavorite]);
 
   const handleClick = () => {
-    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (location.pathname.includes('meals')) {
+      delete inProgressRecipes.meals[recipe.idMeal];
+    } else {
+      delete inProgressRecipes.drinks[recipe.idDrink];
+    }
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+
     let recipeTags = [];
-    if (recipe.idMeal) {
+    if (recipe.idMeal && recipe.strTags) {
       recipeTags = recipe.strTags.split(',');
     }
     const date = new Date();
@@ -55,9 +65,10 @@ function DetailCardInProgress({ recipe, ingredients, measures }) {
       tags: recipeTags,
     };
 
-    if (doneRecipes) {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipes && !doneRecipes.some((done) => done.id === doneRecipe.id)) {
       localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes, doneRecipe]));
-    } else {
+    } else if (!doneRecipes) {
       localStorage.setItem('doneRecipes', JSON.stringify([doneRecipe]));
     }
     history.push('/done-recipes');
@@ -102,52 +113,101 @@ function DetailCardInProgress({ recipe, ingredients, measures }) {
   };
 
   return (
-    <div>
-      <img
-        src={ recipe.strMealThumb || recipe.strDrinkThumb }
-        alt={ recipe.strMeal || recipe.strDrink }
-        data-testid="recipe-photo"
-      />
-      <p data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</p>
-      <p data-testid="recipe-category">{recipe.strCategory}</p>
-      <div>
+    <div className="details-page">
+      <div className="photo-title-container">
+        <img
+          src={ recipe.strMealThumb || recipe.strDrinkThumb }
+          alt={ recipe.strMeal || recipe.strDrink }
+          data-testid="recipe-photo"
+          className="recipe-photo"
+        />
+        <p
+          data-testid="recipe-title"
+          className="recipe-title"
+        >
+          {recipe.strMeal || recipe.strDrink}
+
+        </p>
         {
-          ingredients.map((ingredient, index) => (
-            <label key={ index } data-testid={ `${index}-ingredient-step` }>
-              <input
-                type="checkbox"
-                onChange={ (event) => handleChange(event, index) }
-                checked={ selectedIngredients.includes(ingredient[1]) }
-              />
-              {`${ingredient[1]} - ${measures[index][1]}`}
-            </label>
-          ))
+          location.pathname.includes('meals') ? (
+            <div className="recipe-category">
+              <img src={ renderMealImage(recipe.strCategory) } alt="" />
+              <p
+                data-testid="recipe-category"
+              >
+                {recipe.strCategory}
+              </p>
+            </div>
+          ) : (
+            <div className="recipe-category">
+              <img src={ renderDrinkImage(recipe.strCategory) } alt="" />
+              <p
+                data-testid="recipe-category"
+              >
+                {recipe.strAlcoholic}
+              </p>
+            </div>
+          )
         }
       </div>
-      <p data-testid="instructions">{recipe.strInstructions}</p>
-      {
-        location.pathname.includes('meals') && recipe.strYoutube && (
-          <iframe
-            title="video"
-            data-testid="video"
-            width="320"
-            height="240"
-            src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
-          />
-        )
-      }
-      <ShareButton />
-      <FavoriteButton
-        recipe={ recipe }
-        isFavorite={ isFavorite }
-        setIsFavorite={ setIsFavorite }
-      />
+      <div className="main-detail-container">
+        <h1>Ingredients</h1>
+        <div className="check-ingredients-container">
+          {
+            ingredients.map((ingredient, index) => (
+              <div key={ index }>
+                <label
+                  data-testid={ `${index}-ingredient-step` }
+                  style={ selectedIngredients.includes(ingredient[1])
+                    ? { textDecoration: 'line-through solid rgb(0, 0, 0)' }
+                    : { textDecoration: 'none' } }
+                >
+                  <input
+                    type="checkbox"
+                    onChange={ (event) => handleChange(event, index) }
+                    checked={ selectedIngredients.includes(ingredient[1]) }
+                  />
+                  <img src={ checkIcon } alt="" className="check-icon" />
+                  {`${ingredient[1]} - ${measures[index][1]}`}
+                </label>
+              </div>
+            ))
+          }
+        </div>
+        <h1>Instructions</h1>
+        <div className="instructions-container">
+          <p data-testid="instructions">{recipe.strInstructions}</p>
+        </div>
+        {
+          location.pathname.includes('meals') && recipe.strYoutube && (
+            <div className="video-container">
+              <h1>Video</h1>
+              <iframe
+                title="video"
+                data-testid="video"
+                width="338"
+                height="240"
+                src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
+              />
+            </div>
+          )
+        }
+      </div>
+      <div className="share-fav-btn">
+        <ShareButton />
+        <FavoriteButton
+          recipe={ recipe }
+          isFavorite={ isFavorite }
+          setIsFavorite={ setIsFavorite }
+        />
+      </div>
       <button
         data-testid="finish-recipe-btn"
+        className="btnStart"
         onClick={ handleClick }
         disabled={ selectedIngredients.length !== ingredients.length }
       >
-        Finish Recipes
+        Finish Recipe
       </button>
     </div>
   );

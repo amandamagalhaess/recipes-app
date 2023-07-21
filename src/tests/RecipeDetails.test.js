@@ -79,7 +79,7 @@ describe('Testa a tela de detalhes', () => {
 
     await waitFor(() => expect(screen.getByTestId(recipeTitle)).toBeInTheDocument());
 
-    const startRecipeBtn = screen.getByText('START RECIPE');
+    const startRecipeBtn = screen.getByText('Start Recipe');
     expect(startRecipeBtn).toBeInTheDocument();
   });
 
@@ -90,7 +90,7 @@ describe('Testa a tela de detalhes', () => {
 
     await waitFor(() => expect(screen.getByTestId(recipeTitle)).toBeInTheDocument());
 
-    const continueRecipeBtn = screen.getByText('CONTINUE RECIPE');
+    const continueRecipeBtn = screen.getByText('Continue Recipe');
     expect(continueRecipeBtn).toBeInTheDocument();
   });
 });

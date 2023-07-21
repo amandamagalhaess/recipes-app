@@ -54,8 +54,8 @@ describe('Testa o componente Header', () => {
   // it('Testa se o título do Header é vazio em uma rota inexistente', () => {
   //   renderWithRouter(<Header />, { initialEntries: ['/rota-inexistente'] });
 
-  //   const pageTitle = screen.queryByTestId('page-title');
-  //   expect(pageTitle.innerHTML).toBe('');
+  //   expect(screen.getByRole('heading')).toBeInTheDocument();
+  //   expect(screen.getByText('')).toBeInTheDocument();
   // });
 
   it('Testa se o botão de busca funciona como esperado', () => {
@@ -69,7 +69,7 @@ describe('Testa o componente Header', () => {
     expect(searchContent).toHaveStyle('display: none');
 
     userEvent.click(searchTopBtn);
-    expect(searchContent).toHaveStyle('display: block');
+    expect(searchContent).toHaveStyle('display: flex');
 
     userEvent.click(searchTopBtn);
     expect(searchContent).toHaveStyle('display: none');

@@ -6,16 +6,7 @@ import { fetchMealsByCategory, fetchAllMeals,
 import '../styles/Categories.css';
 import mealIcon from '../images/mealIcon.svg';
 import drinkIcon from '../images/drinkIcon.svg';
-import beefIcon from '../images/beefIcon.svg';
-import breakfastIcon from '../images/breakfastIcon.svg';
-import chickenIcon from '../images/chickenIcon.svg';
-import dessertIcon from '../images/dessertIcon.svg';
-import goatIcon from '../images/goatIcon.svg';
-import ordinaryIcon from '../images/ordinaryDrinkIcon.svg';
-import cocktailIcon from '../images/cocktailIcon.svg';
-import shakeIcon from '../images/shakeIcon.svg';
-import otherIcon from '../images/otherIcon.svg';
-import cocoaIcon from '../images/cocoaIcon.svg';
+import { renderDrinkImage, renderMealImage } from '../service/renderImage';
 
 function Categories() {
   const [categories, setCategories] = useState([]);
@@ -73,32 +64,6 @@ function Categories() {
     }
   };
 
-  const renderImage = (category) => {
-    switch (category) {
-    case 'Beef':
-      return beefIcon;
-    case 'Breakfast':
-      return breakfastIcon;
-    case 'Chicken':
-      return chickenIcon;
-    case 'Dessert':
-      return dessertIcon;
-    case 'Goat':
-      return goatIcon;
-    case 'Ordinary Drink':
-      return ordinaryIcon;
-    case 'Cocktail':
-      return cocktailIcon;
-    case 'Shake':
-      return shakeIcon;
-    case 'Other / Unknown':
-      return otherIcon;
-    case 'Cocoa':
-      return cocoaIcon;
-    default:
-    }
-  };
-
   return (
     <div className="categories-container">
       <button
@@ -119,7 +84,12 @@ function Categories() {
           data-testid={ `${category.strCategory}-category-filter` }
         >
           <div>
-            <img src={ renderImage(category.strCategory) } alt="" />
+            <img
+              src={ location.pathname === '/meals'
+                ? renderMealImage(category.strCategory)
+                : renderDrinkImage(category.strCategory) }
+              alt=""
+            />
           </div>
           {category.strCategory}
         </button>
