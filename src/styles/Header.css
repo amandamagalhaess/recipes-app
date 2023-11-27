@@ -1,0 +1,67 @@
+header {
+  align-items: center;
+  background-color: #fcdc36;
+  display: flex;
+  height: 52px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.leftIcons {
+  align-items: center;
+  display: flex;
+  margin-left: 26px;
+}
+
+.recipeIcon {
+  height: 39.28px;
+  margin-right: 20.76px;
+  width: 42.6px;
+}
+
+.logoIcon {
+  height: 17px;
+  margin-top: 8px;
+  width: 110px;
+}
+
+.rightIcons {
+  align-items: center;
+  display: flex;
+  margin-right: 21.3px;
+}
+
+.searchIconBtn {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.searchIcon {
+  height: 26.85px;
+  margin-right: 16.15px;
+  width: 26.845px;
+}
+
+.profileIcon {
+  height: 28.71px;
+  width: 28.71px;
+}
+
+.MealOrDrinkContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 31px;
+}
+
+.MealOrDrinkContainer h1 {
+  color: #41197f;
+  font-family: Epilogue , sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 2.1px;
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
+}

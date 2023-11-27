@@ -3,11 +3,17 @@ import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import RecipesContext from '../context/RecipesContext';
 import { fetchMealsByCategory, fetchAllMeals,
   fetchDrinksByCategory, fetchAllDrinks } from '../service/FetchAPI';
+import '../styles/Categories.css';
+import mealIcon from '../images/mealIcon.svg';
+import drinkIcon from '../images/drinkIcon.svg';
+import { renderDrinkImage, renderMealImage } from '../service/renderImage';
 
 function Categories() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+
   const location = useLocation();
+
   const { setMeals, setDrinks } = useContext(RecipesContext);
   const magicNumber = 5;
 
@@ -59,7 +65,17 @@ function Categories() {
   };
 
   return (
-    <div>
+    <div className="categories-container">
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        onClick={ handleAllButton }
+      >
+        <div>
+          <img src={ location.pathname === '/meals' ? mealIcon : drinkIcon } alt="" />
+        </div>
+        All
+      </button>
       {categories && categories.slice(0, magicNumber).map((category) => (
         <button
           key={ category.strCategory }
@@ -67,16 +83,17 @@ function Categories() {
           onClick={ () => handleCategoryFilter(category.strCategory) }
           data-testid={ `${category.strCategory}-category-filter` }
         >
+          <div>
+            <img
+              src={ location.pathname === '/meals'
+                ? renderMealImage(category.strCategory)
+                : renderDrinkImage(category.strCategory) }
+              alt=""
+            />
+          </div>
           {category.strCategory}
         </button>
       ))}
-      <button
-        data-testid="All-category-filter"
-        type="button"
-        onClick={ handleAllButton }
-      >
-        All
-      </button>
     </div>
   );
 }

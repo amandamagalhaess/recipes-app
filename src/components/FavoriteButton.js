@@ -40,7 +40,12 @@ function FavoriteButton({ recipe, isFavorite, setIsFavorite }) {
           <button
             onClick={ handleFavoriteButton }
           >
-            <img src={ blackHeartIcon } alt="" data-testid="favorite-btn" />
+            <img
+              src={ blackHeartIcon }
+              alt=""
+              className="favorite-btn"
+              data-testid="favorite-btn"
+            />
           </button>
         ) : (
           <button
@@ -50,6 +55,7 @@ function FavoriteButton({ recipe, isFavorite, setIsFavorite }) {
               src={ whiteHeartIcon }
               alt=""
               data-testid="favorite-btn"
+              className="favorite-btn"
             />
           </button>
         )}

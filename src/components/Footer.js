@@ -6,12 +6,23 @@ import '../styles/Footer.css';
 export default function Footer() {
   return (
     <footer data-testid="footer">
-      <a href="/meals">
-        <img src={ mealIcon } alt="Meal Icon" data-testid="meals-bottom-btn" />
-      </a>
       <a href="/drinks">
-        <img src={ drinkIcon } alt="Drink Icon" data-testid="drinks-bottom-btn" />
+        <img
+          className="drinkIcon"
+          src={ drinkIcon }
+          alt="Drink Icon"
+          data-testid="drinks-bottom-btn"
+        />
       </a>
+      <a href="/meals">
+        <img
+          className="mealIcon"
+          src={ mealIcon }
+          alt="Meal Icon"
+          data-testid="meals-bottom-btn"
+        />
+      </a>
+
     </footer>
   );
 }

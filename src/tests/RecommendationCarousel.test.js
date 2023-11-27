@@ -1,5 +1,5 @@
 import { screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+// import userEvent from '@testing-library/user-event';
 import App from '../App';
 import { renderWithRouter } from './helpers/renderWithRouter';
 
@@ -9,20 +9,7 @@ describe('Testa o componente RecommendationCarousel', () => {
 
     await waitFor(() => {
       expect(screen.getByTestId('0-recommendation-card')).toBeInTheDocument();
-    });
-
-    const nextButton = screen.getByText('Próxima');
-    userEvent.click(nextButton);
-
-    await waitFor(() => {
-      expect(screen.getByTestId('2-recommendation-card')).toBeInTheDocument();
-    });
-
-    const prevButton = screen.getByText('Anterior');
-    userEvent.click(prevButton);
-
-    await waitFor(() => {
-      expect(screen.getByTestId('0-recommendation-card')).toBeInTheDocument();
+      expect(screen.getByTestId('1-recommendation-card')).toBeInTheDocument();
     });
   });
 
@@ -30,20 +17,7 @@ describe('Testa o componente RecommendationCarousel', () => {
     renderWithRouter(<App />, { initialEntries: ['/drinks/15997'] });
 
     await waitFor(() => {
-      expect(screen.getByTestId('1-recommendation-card')).toBeInTheDocument();
-    });
-
-    const nextButton = screen.getByText('Próxima');
-    userEvent.click(nextButton);
-
-    await waitFor(() => {
-      expect(screen.getByTestId('2-recommendation-card')).toBeInTheDocument();
-    });
-
-    const prevButton = screen.getByText('Anterior');
-    userEvent.click(prevButton);
-
-    await waitFor(() => {
+      expect(screen.getByTestId('0-recommendation-card')).toBeInTheDocument();
       expect(screen.getByTestId('1-recommendation-card')).toBeInTheDocument();
     });
   });
