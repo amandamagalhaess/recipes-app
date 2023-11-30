@@ -105,7 +105,7 @@ export default function Header() {
             </button>
           )}
           <a
-            href="/profile"
+            href="#/profile"
             onClick={ handleProfileClick }
           >
             <img

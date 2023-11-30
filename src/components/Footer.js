@@ -6,7 +6,7 @@ import '../styles/Footer.css';
 export default function Footer() {
   return (
     <footer data-testid="footer">
-      <a href="/drinks">
+      <a href="#/drinks">
         <img
           className="drinkIcon"
           src={ drinkIcon }
@@ -14,7 +14,7 @@ export default function Footer() {
           data-testid="drinks-bottom-btn"
         />
       </a>
-      <a href="/meals">
+      <a href="#/meals">
         <img
           className="mealIcon"
           src={ mealIcon }

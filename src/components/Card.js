@@ -8,7 +8,7 @@ function Card({ id, image, name, index }) {
 
   return (
     <a
-      href={ location.pathname === '/meals' ? `/meals/${id}` : `/drinks/${id}` }
+      href={ location.pathname === '/meals' ? `#/meals/${id}` : `#/drinks/${id}` }
       className="link-content"
     >
       <div data-testid={ `${index}-recipe-card` } className="recipe-info">
