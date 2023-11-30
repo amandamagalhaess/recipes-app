@@ -1,3 +1,7 @@
+.height100vh {
+  height: 100vh;
+}
+
 .profile-container {
   align-items: center;
   display: flex;

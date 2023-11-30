@@ -43,7 +43,7 @@
 }
 
 .search-options label {
-  align-items: end;
+  align-items: flex-end;
   color: white;
   display: flex;
   font-family: Epilogue , sans-serif;

@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import allIcon from '../images/allIcon.svg';
+import drinkIcon from '../images/drinkIcon.svg';
+import mealIcon from '../images/mealIcon.svg';
+import '../styles/FavoriteRecipes.css';
 
 export default function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -39,12 +43,12 @@ export default function FavoriteRecipes() {
     setFavoriteRecipes(newFavoriteRecipes);
   };
 
-  const handleFilter = ({ target }) => {
+  const handleFilter = (filter) => {
     const storedFavoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-    if (target.dataset.testid === 'filter-by-all-btn') {
+    if (filter === 'all') {
       setFavoriteRecipes(storedFavoriteRecipes);
-    } else if (target.dataset.testid === 'filter-by-meal-btn') {
+    } else if (filter === 'meal') {
       const doneMeals = storedFavoriteRecipes
         .filter((recipes) => recipes.type === 'meal');
       setFavoriteRecipes(doneMeals);
@@ -56,88 +60,105 @@ export default function FavoriteRecipes() {
   };
 
   return (
-    <div>
+    <div id="divFavorites" className="height100vh">
       <Header />
 
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ handleFilter }
-      >
-        All
-      </button>
+      <div className="categories-container">
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => handleFilter('all') }
+        >
+          <div>
+            <img src={ allIcon } alt="" />
+          </div>
+          All
+        </button>
 
-      <button type="button" data-testid="filter-by-meal-btn" onClick={ handleFilter }>
-        Meals
-      </button>
+        <button
+          type="button"
+          data-testid="filter-by-meal-btn"
+          onClick={ () => handleFilter('meal') }
+        >
+          <div>
+            <img src={ mealIcon } alt="" />
+          </div>
+          Meals
+        </button>
 
-      <button type="button" data-testid="filter-by-drink-btn" onClick={ handleFilter }>
-        Drinks
-      </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => handleFilter('drink') }
+        >
+          <div>
+            <img src={ drinkIcon } alt="" />
+          </div>
+          Drinks
+        </button>
+      </div>
 
-      {favoriteRecipes.map((recipegit, index) => (
-        <div id="divFavorites" key={ recipegit.id }>
-          <a href={ `/${recipegit.type}s/${recipegit.id} ` }>
-            <img
-              src={ recipegit.image }
-              alt={ recipegit.name }
-              data-testid={ `${index}-horizontal-image` }
-            />
+      <div className="done-favorite-recipe">
+        {favoriteRecipes.map((recipe, index) => (
+          <div className="recipe-card" key={ recipe.id }>
+            <a href={ `/${recipe.type}s/${recipe.id} ` }>
+              <img
+                src={ recipe.image }
+                alt={ recipe.name }
+                data-testid={ `${index}-horizontal-image` }
+              />
+            </a>
 
-          </a>
-          {recipegit.type === 'drink' ? (
-            <p data-testid={ `${index}-horizontal-top-text` }>
-              {recipegit.alcoholicOrNot}
-            </p>
-          ) : (
-            <p data-testid={ `${index}-horizontal-top-text` }>
-              {recipegit.nationality}
-              {' '}
-              -
-              {' '}
-              {recipegit.category}
-            </p>
-          )}
-          <a href={ `/${recipegit.type}s/${recipegit.id} ` }>
-            <p data-testid={ `${index}-horizontal-name` }>
-              {recipegit.name}
-            </p>
-          </a>
+            <div className="card-info card-info-in-favorites">
+              <div>
+                <a href={ `/${recipe.type}s/${recipe.id} ` }>
+                  <p data-testid={ `${index}-horizontal-name` }>
+                    {recipe.name}
+                  </p>
+                </a>
+              </div>
 
-          <p data-testid={ `${index}-horizontal-done-date` }>
-            {recipegit.doneDate}
-          </p>
-          {/* {recipegit.tags.slice(0, 2).map((tag, tagIndex) => (
-            <span
-              key={ tagIndex }
-              data-testid={ `${index}-${tag}-horizontal-tag` }
-            >
-              {tag}
-            </span>
-          ))} */}
-          <button
-            type="button"
-            onClick={ () => handleShareButton(JSON.stringify(recipegit)) }
-          >
-            <img
-              src={ shareIcon }
-              alt=""
-              data-testid={ `${index}-horizontal-share-btn` }
-            />
-          </button>
-          <button
-            type="button"
-            onClick={ () => handleDesfavoriteButton(JSON.stringify(recipegit)) }
-          >
-            <img
-              src={ blackHeartIcon }
-              alt=""
-              data-testid={ `${index}-horizontal-favorite-btn` }
-            />
-          </button>
+              {recipe.type === 'drink' ? (
+                <p data-testid={ `${index}-horizontal-top-text` }>
+                  {recipe.alcoholicOrNot}
+                </p>
+              ) : (
+                <p data-testid={ `${index}-horizontal-top-text` }>
+                  {recipe.nationality}
+                  {' '}
+                  -
+                  {' '}
+                  {recipe.category}
+                </p>
+              )}
 
-        </div>
-      ))}
+              <div className="buttons">
+                <button
+                  type="button"
+                  onClick={ () => handleShareButton(JSON.stringify(recipe)) }
+                >
+                  <img
+                    src={ shareIcon }
+                    alt=""
+                    data-testid={ `${index}-horizontal-share-btn` }
+                  />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={ () => handleDesfavoriteButton(JSON.stringify(recipe)) }
+                >
+                  <img
+                    src={ blackHeartIcon }
+                    alt=""
+                    data-testid={ `${index}-horizontal-favorite-btn` }
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

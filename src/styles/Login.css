@@ -1,20 +1,17 @@
 .login-page {
   background: linear-gradient(to bottom, #41197f 55%, white 45%);
-  height: 100vh;
+  height: 800px;
 }
 
 .logo {
-  position: relative;
-  top: 80px;
+  margin-bottom: 25px;
+  margin-top: 80px;
   width: 100%;
 }
 
 .tomato {
-  height: 305px;
-  position: relative;
-  right: 26px;
-  top: 30px;
-  width: 475px;
+  height: 279px;
+  width: 100%;
 }
 
 .login-form {
@@ -75,5 +72,17 @@
   line-height: normal;
   text-align: center;
   text-transform: uppercase;
+  width: 276px;
+}
+
+.login-form .warning {
+  color: #41197f;
+  font-family: Epilogue , sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.36px;
+  margin-top: 10px;
+  text-align: center;
+  text-transform: none;
   width: 276px;
 }

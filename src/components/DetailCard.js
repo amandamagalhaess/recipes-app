@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { renderDrinkImage, renderMealImage } from '../service/renderImage';
-// import drinkIcon from '../images/drinkIcon.svg';
+import ShareButton from './ShareButton';
+import FavoriteButton from './FavoriteButton';
 
 function DetailCard({ recipe, ingredients, measures }) {
+  const { id } = useParams();
   const location = useLocation();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    if (favoriteRecipes.some((favorite) => favorite.id === id)) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }, [id, setIsFavorite]);
 
   return (
     <div>
@@ -23,24 +35,47 @@ function DetailCard({ recipe, ingredients, measures }) {
           {recipe.strMeal || recipe.strDrink}
 
         </p>
+
         {
           location.pathname.includes('meals') ? (
             <div className="recipe-category">
-              <img src={ renderMealImage(recipe.strCategory) } alt="" />
-              <p
-                data-testid="recipe-category"
-              >
-                {recipe.strCategory}
-              </p>
+              <div>
+                <img src={ renderMealImage(recipe.strCategory) } alt="" />
+                <p
+                  data-testid="recipe-category"
+                >
+                  {recipe.strCategory}
+                </p>
+              </div>
+
+              <div className="share-fav-btn">
+                <ShareButton />
+                <FavoriteButton
+                  recipe={ recipe }
+                  isFavorite={ isFavorite }
+                  setIsFavorite={ setIsFavorite }
+                />
+              </div>
             </div>
           ) : (
             <div className="recipe-category">
-              <img src={ renderDrinkImage(recipe.strCategory) } alt="" />
-              <p
-                data-testid="recipe-category"
-              >
-                {recipe.strAlcoholic}
-              </p>
+              <div>
+                <img src={ renderDrinkImage(recipe.strCategory) } alt="" />
+                <p
+                  data-testid="recipe-category"
+                >
+                  {recipe.strAlcoholic}
+                </p>
+              </div>
+
+              <div className="share-fav-btn">
+                <ShareButton />
+                <FavoriteButton
+                  recipe={ recipe }
+                  isFavorite={ isFavorite }
+                  setIsFavorite={ setIsFavorite }
+                />
+              </div>
             </div>
           )
         }

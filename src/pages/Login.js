@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 import '../styles/Login.css';
@@ -60,6 +60,9 @@ function Login() {
           >
             Enter
           </button>
+          <p className="warning">
+            Insira um e-mail válido e uma senha com mais de 6 caracteres
+          </p>
         </form>
       </div>
     </div>

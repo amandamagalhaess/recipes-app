@@ -5,8 +5,6 @@ import DetailCard from '../components/DetailCard';
 import RecommendationCarousel from '../components/RecommendationCarousel';
 import StartRecipe from '../components/StartRecipe';
 import ContinueRecipe from '../components/ContinueRecipe';
-import ShareButton from '../components/ShareButton';
-import FavoriteButton from '../components/FavoriteButton';
 import '../styles/RecipeDetails.css';
 
 function RecipeDetails() {
@@ -16,7 +14,6 @@ function RecipeDetails() {
   const [recipe, setRecipe] = useState(undefined);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -41,15 +38,6 @@ function RecipeDetails() {
     fetchRecipe();
   }, [id, location.pathname, setIngredients, setMeasures, setRecipe]);
 
-  useEffect(() => {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    if (favoriteRecipes.some((favorite) => favorite.id === id)) {
-      setIsFavorite(true);
-    } else {
-      setIsFavorite(false);
-    }
-  }, [id, setIsFavorite]);
-
   return (
     <div className="details-page" id="details-container">
       { recipe && <DetailCard
@@ -57,14 +45,7 @@ function RecipeDetails() {
         ingredients={ ingredients }
         measures={ measures }
       />}
-      <div className="share-fav-btn">
-        <ShareButton />
-        <FavoriteButton
-          recipe={ recipe }
-          isFavorite={ isFavorite }
-          setIsFavorite={ setIsFavorite }
-        />
-      </div>
+
       <div className="recommended-container">
         <h1> Recommended </h1>
         <RecommendationCarousel />

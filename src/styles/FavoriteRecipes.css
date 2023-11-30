@@ -1,0 +1,15 @@
+.card-info-in-favorites {
+  margin-top: 15px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 35px;
+  width: 50px;
+}
+
+.buttons button img {
+  height: 20px;
+  width: 20px;
+}

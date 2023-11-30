@@ -19,7 +19,7 @@ export default function Profile() {
   };
 
   return (
-    <div>
+    <div className="height100vh">
       <Header />
       <div className="profile-container">
         <p data-testid="profile-email" className="email">{getEmail()}</p>

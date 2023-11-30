@@ -14,7 +14,7 @@
   height: 162px;
   object-fit: cover;
   opacity: 0.55;
-  width: 100vw;
+  width: 100%;
 }
 
 .recipe-title {
@@ -32,12 +32,19 @@
 .recipe-category {
   align-items: center;
   display: flex;
-  margin-left: 19px;
+  justify-content: space-between;
+  padding: 0 20px;
   position: absolute;
   top: 14px;
+  width: 320px;
 }
 
-.recipe-category img {
+.recipe-category div {
+  align-items: center;
+  display: flex;
+}
+
+.recipe-category > div:nth-child( 1 ) > img {
   border: 1.32px solid rgb(252, 196, 54);
   border-radius: 25px;
   height: 25px;
@@ -56,9 +63,6 @@
 
 .share-fav-btn {
   display: flex;
-  position: absolute;
-  right: 30px;
-  top: 14px;
 }
 
 .share-btn {

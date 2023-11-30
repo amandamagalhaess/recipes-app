@@ -131,21 +131,43 @@ function DetailCardInProgress({ recipe, ingredients, measures }) {
         {
           location.pathname.includes('meals') ? (
             <div className="recipe-category">
-              <img src={ renderMealImage(recipe.strCategory) } alt="" />
-              <p
-                data-testid="recipe-category"
-              >
-                {recipe.strCategory}
-              </p>
+              <div>
+                <img src={ renderMealImage(recipe.strCategory) } alt="" />
+                <p
+                  data-testid="recipe-category"
+                >
+                  {recipe.strCategory}
+                </p>
+              </div>
+
+              <div className="share-fav-btn">
+                <ShareButton />
+                <FavoriteButton
+                  recipe={ recipe }
+                  isFavorite={ isFavorite }
+                  setIsFavorite={ setIsFavorite }
+                />
+              </div>
             </div>
           ) : (
             <div className="recipe-category">
-              <img src={ renderDrinkImage(recipe.strCategory) } alt="" />
-              <p
-                data-testid="recipe-category"
-              >
-                {recipe.strAlcoholic}
-              </p>
+              <div>
+                <img src={ renderDrinkImage(recipe.strCategory) } alt="" />
+                <p
+                  data-testid="recipe-category"
+                >
+                  {recipe.strAlcoholic}
+                </p>
+              </div>
+
+              <div className="share-fav-btn">
+                <ShareButton />
+                <FavoriteButton
+                  recipe={ recipe }
+                  isFavorite={ isFavorite }
+                  setIsFavorite={ setIsFavorite }
+                />
+              </div>
             </div>
           )
         }
@@ -193,14 +215,7 @@ function DetailCardInProgress({ recipe, ingredients, measures }) {
           )
         }
       </div>
-      <div className="share-fav-btn">
-        <ShareButton />
-        <FavoriteButton
-          recipe={ recipe }
-          isFavorite={ isFavorite }
-          setIsFavorite={ setIsFavorite }
-        />
-      </div>
+
       <button
         data-testid="finish-recipe-btn"
         className="btnStart"
