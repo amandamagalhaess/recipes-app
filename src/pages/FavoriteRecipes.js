@@ -101,7 +101,7 @@ export default function FavoriteRecipes() {
       <div className="done-favorite-recipe">
         {favoriteRecipes.map((recipe, index) => (
           <div className="recipe-card" key={ recipe.id }>
-            <a href={ `/${recipe.type}s/${recipe.id} ` }>
+            <a href={ `#/${recipe.type}s/${recipe.id} ` }>
               <img
                 src={ recipe.image }
                 alt={ recipe.name }
@@ -111,7 +111,7 @@ export default function FavoriteRecipes() {
 
             <div className="card-info card-info-in-favorites">
               <div>
-                <a href={ `/${recipe.type}s/${recipe.id} ` }>
+                <a href={ `#/${recipe.type}s/${recipe.id} ` }>
                   <p data-testid={ `${index}-horizontal-name` }>
                     {recipe.name}
                   </p>
